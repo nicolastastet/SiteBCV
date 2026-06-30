@@ -6,7 +6,7 @@
 >
 > ⚠️ **Mise à jour du 30/06/2026** : ce fichier remplace une version précédente écrite pour une stack 100 % HTML/CSS statique sans JS. Le projet a basculé vers **React + Vite**, décision du porteur de projet (motif : esthétique/maintenabilité). Voir §3 et §7 pour le nouveau modèle de sécurité (ADR-005, qui remplace ADR-001/003/004).
 >
-> ℹ️ Ce fichier a été rédigé à partir de la documentation Notion du projet, **sans lecture directe du contenu actuel du dépôt** (accès en lecture du repo non disponible au moment de la rédaction). Si l'état réel du code diverge de ce qui est décrit ici, c'est l'état réel du repo qui prévaut — merci de signaler les écarts pour que ce fichier soit corrigé.
+> ℹ️ Ce fichier a été rédigé à partir de la documentation Notion du projet **et d'une lecture partielle du dépôt** (page d'accueil GitHub du repo consultée le 30/06/2026 ; le détail du contenu de `bcv-react/` n'a pas pu être lu — accès bloqué par les règles d'exploration du site pour la navigation de dossiers). Confirmé à cette date : le repo `nicolastastet/SiteBCV` est public, et sa racine contient `bcv-react/` (le projet React/Vite), `docs/`, `logo/`, ainsi que l'ancienne stack statique encore présente telle quelle à la racine (`index.html`, `style.css`, `index-refonte.html`, `style-refonte.css` — pas dans un sous-dossier dédié). Le `README.md` du repo est minimal à ce stade. Aucun `CLAUDE.md`, `_headers` ni `README-securite.md` n'étaient visibles à la racine au moment de cette lecture. Si l'état réel diverge de ce qui suit, l'état réel du repo prévaut — merci de signaler les écarts.
 
 ---
 
@@ -148,15 +148,30 @@ D'anciens fichiers `index.html` / `style.css` (et variantes `*-refonte`) en HTML
 
 ---
 
-## 6. Structure des fichiers attendue (à adapter à la structure Vite réelle du repo)
+## 6. Structure des fichiers — état confirmé + cible
 
+**Confirmé dans le repo (racine, au 30/06/2026)** :
 ```
 SiteBCV/
-├── CLAUDE.md
-├── README.md
+├── bcv-react/             ← le projet React/Vite (contenu non lu en détail, cf. note en tête de fichier)
+├── docs/
+├── logo/
+├── .gitignore
+├── README.md              (minimal, à enrichir)
+├── index.html             ← ANCIENNE stack statique, encore à la racine
+├── style.css               ← ANCIENNE stack statique, encore à la racine
+├── index-refonte.html     ← ANCIENNE stack, variante "refonte"
+└── style-refonte.css      ← ANCIENNE stack, variante "refonte"
+```
+
+⚠️ Point d'attention : les fichiers de l'ancienne stack (`index.html`, `style.css`, `index-refonte.html`, `style-refonte.css`) sont actuellement **à la racine du repo**, au même niveau que `bcv-react/`, pas isolés dans un dossier d'archive. Risque de confusion pour quiconque (humain ou agent) ouvre le repo et ne sait pas lequel est la cible de prod. **Tâche recommandée** : déplacer ces 4 fichiers dans un dossier `archive/` ou `legacy-static/` à la racine, pour ne laisser aucune ambiguïté sur ce qui est actif (`bcv-react/`) vs historique.
+
+**Cible à terme à l'intérieur de `bcv-react/`** (indicative — à vérifier/ajuster une fois le contenu du dossier lisible) :
+```
+bcv-react/
 ├── package.json
 ├── vite.config.ts
-├── index.html
+├── index.html              point d'entrée Vite (différent du index.html racine ci-dessus)
 ├── src/
 │   ├── main.tsx
 │   ├── App.tsx
@@ -166,13 +181,14 @@ SiteBCV/
 │   └── assets/
 ├── public/
 │   └── fonts/
-├── content/        (si Decap CMS) articles en Markdown
-├── admin/          (si Decap CMS) config.yml + interface
-├── _headers        en-têtes sécurité Cloudflare Pages
-└── README-securite.md
+content/        (si Decap CMS) articles en Markdown
+admin/          (si Decap CMS) config.yml + interface
+_headers        en-têtes sécurité Cloudflare Pages
+README-securite.md
+CLAUDE.md        ce fichier — à placer à la racine du repo (pas dans bcv-react/), pour couvrir tout le projet
 ```
 
-> ⚠️ Arborescence indicative (issue de la doc projet). Vérifier la structure réelle générée par le scaffold Vite et ajuster ce fichier si elle diverge.
+> Ni `_headers`, ni `README-securite.md`, ni `CLAUDE.md` n'étaient visibles à la racine du repo au moment de la rédaction — à créer/déplacer.
 
 ---
 
@@ -200,6 +216,7 @@ frame-ancestors 'none'; upgrade-insecure-requests
 
 ## 8. Méthode de travail sur ce projet
 
+- **Première action sur ce repo** : lister et lire le contenu réel de `bcv-react/` (package.json, structure src/) avant toute modification — ce fichier n'a pas pu être lu en détail au moment de sa rédaction (cf. note en tête de fichier), donc le §6 "cible" est une hypothèse à confirmer, pas un état constaté.
 - Le projet avance étape par étape, une page ou une fonctionnalité à la fois.
 - Avant de coder une nouvelle page : relire ce fichier, en particulier §3 (charte) et §5 (responsive).
 - Toujours vérifier le rendu à 3 largeurs avant de considérer une page terminée.
@@ -221,7 +238,7 @@ frame-ancestors 'none'; upgrade-insecure-requests
 
 ### Livré (sous l'ancienne stack, sert de référence pour le portage React)
 - [x] Maquette complète de la page d'accueil (HTML + CSS), responsive vérifié — Option A validée.
-- [x] Hero avec diagonale clip-path propre, photo pleine hauteur. 
+- [x] Hero avec diagonale clip-path propre, photo pleine hauteur.
 - [x] Modèle de sécurité initial documenté (obsolète, remplacé par ADR-005).
 
 ### À faire (ordre suggéré, sous la nouvelle stack React/Vite)
