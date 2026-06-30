@@ -6,6 +6,7 @@ import {
   animate,
   useScroll,
   useTransform,
+  useMotionValue,
 } from "motion/react";
 import {
   IconCalendarEvent,
@@ -14,6 +15,8 @@ import {
   IconClipboardList,
   IconArrowRight,
   IconArrowNarrowRight,
+  IconChevronLeft,
+  IconChevronRight,
   IconMenu2,
   IconBrandFacebook,
   IconBrandInstagram,
@@ -121,28 +124,36 @@ function Hero() {
   const reduce = useReducedMotion();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const yImg = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 80]);
+  // Parallax multi-couches : la photo descend, le logo filigrane contre-bouge, léger zoom.
+  const yImg = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 120]);
+  const scaleImg = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.12]);
+  const yLogo = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -60]);
   const words = ["Le", "basket"];
   return (
-    <section ref={ref} className="relative overflow-hidden bg-rouge md:flex md:min-h-[100dvh] md:items-center">
+    <section ref={ref} className="relative overflow-hidden bg-rouge">
+      {/* Conteneur plafonné : au-delà de ~1800px le fond rouge remplit, le layout reste centré (évite l'étirement sur écrans ultra-larges) */}
+      <div className="relative mx-auto w-full max-w-[1800px] md:flex md:min-h-[640px] md:items-center">
       <motion.img
         src={LOGO_BLANC}
         alt=""
         aria-hidden
+        style={{ y: yLogo }}
         initial={reduce ? false : { opacity: 0, scale: 0.8, rotate: -12 }}
         animate={{ opacity: 0.07, scale: 1, rotate: 0 }}
         transition={{ duration: 1.2, ease: EASE }}
         className="pointer-events-none absolute -left-24 -top-24 z-0 hidden h-[520px] w-[520px] select-none md:block"
       />
+
+      {/* Photo droite avec diagonale */}
       <div
         className="absolute inset-y-0 right-0 z-[5] hidden w-[55%] overflow-hidden md:block lg:w-[56%]"
         style={{ clipPath: "polygon(12% 0, 100% 0, 100% 100%, 0% 100%)" }}
       >
         <motion.img
           src="/hero-equipe.jpg"
-          alt="Les équipes du Basket Club Verfeillois réunies au gymnase"
-          style={{ y: yImg }}
-          className="absolute inset-x-0 -top-24 h-[calc(100%+12rem)] w-full object-cover"
+          alt="Les équipes du Basket Club Verfeillois réunies au gymnase lors du tournoi"
+          style={{ y: yImg, scale: scaleImg }}
+          className="absolute inset-x-0 -top-24 h-[calc(100%+12rem)] w-full origin-center object-cover object-[center_35%]"
         />
         <div
           aria-hidden
@@ -151,8 +162,9 @@ function Hero() {
         />
       </div>
 
+      {/* Texte gauche */}
       <div className="relative z-10 mx-auto w-full max-w-[1180px] px-6">
-        <div className="flex flex-col justify-center py-16 md:max-w-[520px] md:py-28">
+        <div className="flex flex-col justify-center py-16 md:max-w-[520px] md:py-24">
           <motion.p
             initial={reduce ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -215,13 +227,17 @@ function Hero() {
           </motion.div>
         </div>
       </div>
+
+      {/* Photo mobile */}
       <div className="block md:hidden px-6 pb-12">
         <img
           src="/hero-equipe.jpg"
-          alt="Les équipes du Basket Club Verfeillois réunies au gymnase"
-          className="aspect-video w-full rounded-xl object-cover"
+          alt="Les équipes du Basket Club Verfeillois réunies au gymnase lors du tournoi"
+          className="aspect-video w-full rounded-xl object-cover object-[center_35%]"
         />
       </div>
+      </div>
+
       <div
         aria-hidden
         className="absolute bottom-0 left-0 right-0 z-20 h-12 bg-white"
@@ -343,30 +359,85 @@ function Equipes() {
     { age: "Seniors", det: "18 ans et +", seed: "seniors" },
     { age: "Loisir", det: "Tous niveaux", seed: "loisir" },
   ];
+  const viewportRef = useRef(null);
+  const trackRef = useRef(null);
+  const x = useMotionValue(0);
+  const [maxDrag, setMaxDrag] = useState(0);
+
+  // Calcule la distance de défilement possible (largeur du rail - largeur visible)
+  useEffect(() => {
+    const calc = () => {
+      if (!viewportRef.current || !trackRef.current) return;
+      const diff = trackRef.current.scrollWidth - viewportRef.current.offsetWidth;
+      setMaxDrag(diff > 0 ? diff : 0);
+    };
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
+
+  // Flèches : avance/recule d'une carte (256px = 240 + 16 de gap)
+  const move = (dir) => {
+    const target = Math.max(-maxDrag, Math.min(0, x.get() - dir * 256));
+    animate(x, target, { duration: 0.5, ease: EASE });
+  };
+
   return (
-    <section id="équipes" className="py-20 md:py-28">
+    <section id="équipes" className="overflow-hidden py-20 md:py-28">
       <div className="mx-auto max-w-[1180px] px-6">
         <Reveal>
-          <h2 className="font-display text-[clamp(28px,4.4vw,44px)] font-bold uppercase leading-none tracking-tight">
-            Trouvez la catégorie de votre enfant
-          </h2>
-          <p className="mt-4 max-w-[60ch] text-[17px] text-neutral-600">
-            Du baby-basket aux seniors, chaque âge a son équipe. Faites glisser pour parcourir les catégories.
-          </p>
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <h2 className="font-display text-[clamp(28px,4.4vw,44px)] font-bold uppercase leading-none tracking-tight">
+                Trouvez la catégorie de votre enfant
+              </h2>
+              <p className="mt-4 max-w-[60ch] text-[17px] text-neutral-600">
+                Du baby-basket aux seniors, chaque âge a son équipe. Faites glisser ou utilisez les flèches.
+              </p>
+            </div>
+            {/* Flèches de navigation (cachées sur mobile, le drag suffit) */}
+            <div className="hidden shrink-0 gap-3 sm:flex">
+              <button
+                onClick={() => move(-1)}
+                aria-label="Catégorie précédente"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-bordure text-encre transition-colors hover:border-rouge hover:text-rouge"
+              >
+                <IconChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                onClick={() => move(1)}
+                aria-label="Catégorie suivante"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-bordure text-encre transition-colors hover:border-rouge hover:text-rouge"
+              >
+                <IconChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
         </Reveal>
-        <div className="no-scrollbar mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3">
-          {eq.map((e, i) => (
-            <Reveal key={e.age} delay={i * 0.05}>
+
+        <div ref={viewportRef} className="mt-8 overflow-hidden">
+          <motion.div
+            ref={trackRef}
+            drag="x"
+            dragConstraints={{ left: -maxDrag, right: 0 }}
+            dragElastic={0.08}
+            style={{ x }}
+            className="flex cursor-grab gap-4 active:cursor-grabbing"
+          >
+            {eq.map((e) => (
               <motion.a
+                key={e.age}
                 href="#équipes"
+                onClick={(ev) => ev.preventDefault()}
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.25, ease: EASE }}
-                className="group relative block h-64 w-[240px] shrink-0 snap-start overflow-hidden rounded-xl border border-bordure shadow-[0_8px_24px_rgba(22,22,22,0.06)]"
+                className="group relative block h-64 w-[240px] shrink-0 overflow-hidden rounded-xl border border-bordure shadow-[0_8px_24px_rgba(22,22,22,0.06)]"
               >
                 <img
                   src={img(`bcv-${e.seed}`, 480, 520)}
                   alt={`Catégorie ${e.age}`}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  draggable={false}
+                  className="pointer-events-none absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-encre/85 via-encre/20 to-transparent" />
                 <span className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 bg-rouge transition-transform duration-300 group-hover:scale-y-100" />
@@ -375,8 +446,8 @@ function Equipes() {
                   <p className="text-[14px] text-white/80">{e.det}</p>
                 </div>
               </motion.a>
-            </Reveal>
-          ))}
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
@@ -472,18 +543,25 @@ function Inscriptions() {
 }
 
 function Partenaires() {
+  const reduce = useReducedMotion();
   const logos = ["Mairie de Verfeil", "Crédit Mutuel", "Intersport", "Garage Central", "Boulangerie Pace", "Décathlon"];
-  const row = [...logos, ...logos];
+  // Un "bloc" assez large pour couvrir un écran ultra-large (34" ≈ 3440px), puis dupliqué pour la boucle -50%.
+  const bloc = [...logos, ...logos, ...logos];
+  const row = [...bloc, ...bloc];
   return (
     <section className="overflow-hidden py-16" aria-label="Nos partenaires">
       <p className="mb-8 text-center font-display text-[13px] uppercase tracking-[0.2em] text-rouge">
         Ils soutiennent le club
       </p>
-      <div className="relative flex">
+      <div className="group relative flex overflow-hidden">
+        {/* Dégradés blancs sur les bords : les logos apparaissent / disparaissent en douceur */}
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent md:w-40" />
+        <div aria-hidden className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent md:w-40" />
+
         <motion.div
-          className="flex shrink-0 gap-4"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 28, ease: "linear", repeat: Infinity }}
+          className="flex shrink-0 gap-4 pr-4"
+          animate={reduce ? undefined : { x: ["0%", "-50%"] }}
+          transition={{ duration: 32, ease: "linear", repeat: Infinity }}
         >
           {row.map((l, i) => (
             <div
