@@ -1,14 +1,17 @@
-﻿# DÃ©pendances
+# Dépendances
 node_modules/
 
 # Build
 dist/
 .vite/
 
-# SystÃ¨me / Ã©diteurs
+# Système / éditeurs
 .DS_Store
 Thumbs.db
 *.log
+
+# Config locale Claude Code (ne pas committer)
+.claude/
 
 # Secrets / environnement
 .env
