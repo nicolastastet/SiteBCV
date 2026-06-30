@@ -1,0 +1,15 @@
+﻿# DÃ©pendances
+node_modules/
+
+# Build
+dist/
+.vite/
+
+# SystÃ¨me / Ã©diteurs
+.DS_Store
+Thumbs.db
+*.log
+
+# Secrets / environnement
+.env
+.env.*

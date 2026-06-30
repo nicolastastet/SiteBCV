@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basket Club Verfeillois — Le basket à Verfeil</title>
+  <meta name="description" content="Club de basket à Verfeil (31). Entraînements, équipes par âge, actualités et inscriptions. Rejoignez le BCV !">
+
+  <!-- Sécurité : CSP. NB : ce preview autorise Google Fonts pour afficher Oswald.
+       EN PRODUCTION → auto-héberger les polices et retirer les domaines Google
+       (cf. README-securite.md), ce qui permet la CSP stricte 'self'. -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'none'; style-src 'self' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; form-action 'self'; frame-src 'none'">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="lien-evitement" href="#contenu">Aller au contenu</a>
+
+  <!-- ===================== EN-TÊTE ===================== -->
+  <header class="en-tete">
+    <div class="conteneur en-tete-interieur">
+      <a class="logo" href="#" aria-label="Accueil — Basket Club Verfeillois">
+        <svg width="32" height="32" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13.5" fill="none" stroke="#E63946" stroke-width="2"/><path d="M15 1.5 V28.5 M3 9 Q15 15 27 9 M3 21 Q15 15 27 21" fill="none" stroke="#E63946" stroke-width="1.4"/></svg>
+        <span>BCV</span>
+      </a>
+      <details class="menu">
+        <summary class="menu-bouton" aria-label="Ouvrir le menu">Menu</summary>
+        <nav class="menu-nav" aria-label="Navigation principale">
+          <a href="#le-club">Le Club</a>
+          <a href="#equipes">Équipes</a>
+          <a href="#planning">Planning</a>
+          <a href="#actus">Actus</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </details>
+      <a class="bouton bouton-primaire en-tete-cta" href="#inscriptions">S'inscrire</a>
+    </div>
+  </header>
+
+  <main id="contenu">
+
+    <!-- ===================== 1. HERO (rouge dominant) ===================== -->
+    <section class="hero">
+      <div class="conteneur hero-interieur">
+        <div class="hero-texte">
+          <p class="eyebrow eyebrow-clair">Verfeil · Haute-Garonne</p>
+          <h1 class="titre">Le basket<br><span class="vert">à Verfeil</span></h1>
+          <p class="hero-promesse">Du mini-basket aux seniors. On joue, on progresse, on gagne ensemble. Saison 2026-2027 : inscriptions ouvertes.</p>
+          <div class="hero-actions">
+            <a class="bouton bouton-blanc" href="#inscriptions">Rejoindre le club</a>
+            <a class="lien-clair" href="#planning">Voir les créneaux →</a>
+          </div>
+        </div>
+        <div class="hero-visuel">
+          <span class="photo" role="img" aria-label="Photo de l'équipe du club"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2. CHIFFRES (bandeau) ===================== -->
+    <section class="bandeau-chiffres" aria-label="Le club en chiffres">
+      <div class="conteneur grille-chiffres">
+        <div class="chiffre"><b>180</b><span>licenciés</span></div>
+        <div class="chiffre"><b>12</b><span>équipes</span></div>
+        <div class="chiffre"><b>40</b><span>ans d'existence</span></div>
+        <div class="chiffre"><b>8</b><span>éducateurs diplômés</span></div>
+      </div>
+    </section>
+
+    <!-- ===================== 3. ACCÈS RAPIDES ===================== -->
+    <section class="acces-rapides" aria-label="Accès rapides">
+      <div class="conteneur">
+        <div class="grille-rapide">
+          <a class="carte-rapide" href="#planning">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+            <span class="carte-titre">Planning</span>
+            <span class="carte-sous">Horaires d'entraînement</span>
+          </a>
+          <a class="carte-rapide" href="#actus">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M5 4H3v2a3 3 0 0 0 3 3M19 4h2v2a3 3 0 0 1-3 3M9 18h6M10 14v4M14 14v4M8 21h8"/></svg>
+            <span class="carte-titre">Prochains matchs</span>
+            <span class="carte-sous">Calendrier & résultats</span>
+          </a>
+          <a class="carte-rapide" href="#contact">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+            <span class="carte-titre">Contact</span>
+            <span class="carte-sous">Qui contacter ?</span>
+          </a>
+          <a class="carte-rapide" href="#inscriptions">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3H8a2 2 0 0 0-2 2v15l6-3 6 3V5a2 2 0 0 0-2-2z"/><path d="M9 8h6M9 12h4"/></svg>
+            <span class="carte-titre">Inscriptions</span>
+            <span class="carte-sous">Tarifs & démarches</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 4. LE CLUB EN BREF ===================== -->
+    <section class="club-bref" id="le-club">
+      <div class="conteneur club-bref-interieur">
+        <p class="eyebrow">Le club</p>
+        <h2 class="titre-section">Un club familial, sportif & éducatif</h2>
+        <p>Depuis 1984, le BCV fait grandir les jeunes de Verfeil sur et en dehors du terrain. Encadrement diplômé, esprit d'équipe et bonne humeur : ici, on vient progresser autant que se faire des amis.</p>
+        <a class="bouton bouton-vert" href="#le-club">Découvrir le club</a>
+      </div>
+    </section>
+
+    <!-- ===================== 5. ÉQUIPES ===================== -->
+    <section class="equipes" id="equipes">
+      <div class="conteneur">
+        <p class="eyebrow">Nos équipes</p>
+        <h2 class="titre-section">Trouvez la catégorie de votre enfant</h2>
+        <div class="grille-equipes">
+          <a class="carte-equipe" href="#equipes"><span class="badge-age">Baby / U7</span><span>3 à 6 ans</span></a>
+          <a class="carte-equipe" href="#equipes"><span class="badge-age">U9 · U11</span><span>7 à 10 ans</span></a>
+          <a class="carte-equipe" href="#equipes"><span class="badge-age">U13 · U15</span><span>11 à 14 ans</span></a>
+          <a class="carte-equipe" href="#equipes"><span class="badge-age">U17 · U18</span><span>15 à 17 ans</span></a>
+          <a class="carte-equipe" href="#equipes"><span class="badge-age">Seniors</span><span>18 ans et +</span></a>
+          <a class="carte-equipe" href="#equipes"><span class="badge-age">Loisir</span><span>Tous niveaux</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 6. ACTUALITÉS ===================== -->
+    <section class="actus" id="actus">
+      <div class="conteneur">
+        <p class="eyebrow">Actualités</p>
+        <h2 class="titre-section">La vie du club</h2>
+        <div class="grille-actus">
+          <article class="carte-actu">
+            <span class="actu-media" role="img" aria-label="Illustration"></span>
+            <div class="actu-corps">
+              <time class="actu-date" datetime="2026-06-20">20 juin 2026</time>
+              <h3>Belle victoire des U13 en finale !</h3>
+              <a class="lien-actu" href="#actus">Lire l'article →</a>
+            </div>
+          </article>
+          <article class="carte-actu">
+            <span class="actu-media" role="img" aria-label="Illustration"></span>
+            <div class="actu-corps">
+              <time class="actu-date" datetime="2026-06-14">14 juin 2026</time>
+              <h3>Tournoi de fin de saison : retour en images</h3>
+              <a class="lien-actu" href="#actus">Lire l'article →</a>
+            </div>
+          </article>
+          <article class="carte-actu">
+            <span class="actu-media" role="img" aria-label="Illustration"></span>
+            <div class="actu-corps">
+              <time class="actu-date" datetime="2026-06-05">5 juin 2026</time>
+              <h3>Portrait : rencontre avec notre coach U15</h3>
+              <a class="lien-actu" href="#actus">Lire l'article →</a>
+            </div>
+          </article>
+        </div>
+        <p class="actus-lien"><a class="lien-actu" href="#actus">Toutes les actualités →</a></p>
+      </div>
+    </section>
+
+    <!-- ===================== 7. BANDEAU INSCRIPTIONS (vert) ===================== -->
+    <section class="inscriptions" id="inscriptions">
+      <div class="conteneur inscriptions-interieur">
+        <div>
+          <h2 class="titre-section titre-blanc">Inscriptions ouvertes</h2>
+          <p>Permanences au gymnase les samedis de septembre, de 10h à 12h. Pass'Sport et coupons ANCV acceptés.</p>
+        </div>
+        <a class="bouton bouton-blanc bouton-grand" href="#contact">S'inscrire</a>
+      </div>
+    </section>
+
+    <!-- ===================== 8. PARTENAIRES ===================== -->
+    <section class="partenaires" aria-label="Nos partenaires">
+      <div class="conteneur">
+        <p class="eyebrow centre">Ils soutiennent le club</p>
+        <div class="grille-logos">
+          <span class="logo-partenaire">Partenaire 1</span>
+          <span class="logo-partenaire">Partenaire 2</span>
+          <span class="logo-partenaire">Partenaire 3</span>
+          <span class="logo-partenaire">Partenaire 4</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 9. NEWSLETTER ===================== -->
+    <section class="newsletter">
+      <div class="conteneur newsletter-interieur">
+        <div>
+          <h2 class="titre-section">Restez informés</h2>
+          <p>Recevez les actus du club et les dates importantes par e-mail.</p>
+        </div>
+        <!-- Sécurité formulaire : action à brancher, validation + CSRF côté serveur. honeypot ci-dessous. -->
+        <form class="form-newsletter" action="" method="post" autocomplete="on">
+          <div class="champ-piege" aria-hidden="true">
+            <label for="site_internet">Ne pas remplir</label>
+            <input type="text" id="site_internet" name="site_internet" tabindex="-1" autocomplete="off">
+          </div>
+          <label for="email" class="form-label">Votre adresse e-mail</label>
+          <div class="form-ligne">
+            <input type="email" id="email" name="email" class="form-champ" placeholder="prenom@exemple.fr" required maxlength="120" autocomplete="email" spellcheck="false">
+            <button type="submit" class="bouton bouton-primaire">S'abonner</button>
+          </div>
+          <p class="form-consentement">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">J'accepte de recevoir les e-mails du club et j'ai lu les <a href="#mentions">mentions légales</a>.</label>
+          </p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== PIED DE PAGE (clair, pas de noir) ===================== -->
+  <footer class="pied" id="contact">
+    <div class="conteneur grille-pied">
+      <div>
+        <p class="pied-titre">Basket Club Verfeillois</p>
+        <p>Gymnase municipal<br>31590 Verfeil</p>
+        <p><a href="mailto:contact@bcv-verfeil.fr">contact@bcv-verfeil.fr</a></p>
+      </div>
+      <div>
+        <p class="pied-titre">Navigation</p>
+        <ul class="pied-liens">
+          <li><a href="#le-club">Le Club</a></li>
+          <li><a href="#equipes">Équipes</a></li>
+          <li><a href="#planning">Planning</a></li>
+          <li><a href="#actus">Actualités</a></li>
+          <li><a href="#inscriptions">Inscriptions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="pied-titre">Suivez-nous</p>
+        <ul class="pied-liens">
+          <li><a href="#" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+          <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="pied-titre">Informations</p>
+        <ul class="pied-liens">
+          <li><a href="#mentions" id="mentions">Mentions légales</a></li>
+          <li><a href="#mentions">Confidentialité (RGPD)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="conteneur pied-bas">
+      <p>© 2026 Basket Club Verfeillois — Tous droits réservés.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

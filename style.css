@@ -1,0 +1,161 @@
+/* ===================================================================
+   BCV — Option A : rouge dominant + vert signature (format sportif)
+   100 % HTML/CSS, sans JS. Palette : rouge/vert/blanc.
+   Encre #161616 UNIQUEMENT pour le texte. Responsive complet.
+   =================================================================== */
+:root{
+  --rouge:#E63946; --rouge-fonce:#C1121F;
+  --vert:#1E8E5A; --vert-vif:#27C277; --vert-fonce:#166D45;
+  --blanc:#FFFFFF; --coquille:#F7F7F4;
+  --encre:#161616; --gris:#6B7280; --bordure:#E6E6E2;
+  --rayon:8px; --rayon-img:10px;
+  --ombre:0 1px 2px rgba(22,22,22,.04), 0 6px 18px rgba(22,22,22,.06);
+  --ombre-forte:0 10px 30px rgba(22,22,22,.10);
+  --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:32px; --sp-6:48px; --sp-8:64px; --sp-12:96px;
+  --largeur:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color:var(--encre);background:var(--blanc);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-tap-highlight-color:rgba(230,57,70,.15)}
+img{max-width:100%;display:block}
+.conteneur{max-width:var(--largeur);margin:0 auto;padding:0 var(--sp-3);width:100%}
+section{padding:var(--sp-8) 0}
+.titre,.titre-section,.badge-age,.carte-titre,.menu-bouton,.bouton,.eyebrow,.actu-corps h3,.chiffre b,.logo span,.lien-clair,.lien-actu,.pied-titre,.menu-nav a{font-family:'Oswald',system-ui,sans-serif}
+.titre{font-weight:700;font-size:clamp(38px,6.2vw,64px);line-height:.95;text-transform:uppercase;letter-spacing:.005em}
+.titre-section{font-weight:700;font-size:clamp(24px,4vw,36px);line-height:1;text-transform:uppercase;margin-bottom:var(--sp-2)}
+.eyebrow{font-weight:600;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--rouge);margin-bottom:var(--sp-2);display:block}
+.eyebrow.centre{text-align:center}
+.vert{color:var(--vert-vif)}
+.lien-evitement{position:absolute;left:-9999px;top:0;background:var(--encre);color:#fff;padding:12px 18px;z-index:100}
+.lien-evitement:focus{left:0}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--vert);outline-offset:2px}
+.photo,.actu-media{position:relative;background:#DAD7D1;display:block;overflow:hidden}
+.photo::after{content:"PHOTO — vraie image du club";position:absolute;bottom:10px;left:14px;font-size:11px;color:#7d776e}
+.bouton{display:inline-flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;text-transform:uppercase;letter-spacing:.04em;text-decoration:none;cursor:pointer;padding:14px 28px;min-height:48px;border-radius:var(--rayon);border:none;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.bouton-primaire{background:var(--rouge);color:#fff}
+.bouton-primaire:hover{background:var(--rouge-fonce);transform:translateY(-2px)}
+.bouton-blanc{background:#fff;color:var(--rouge-fonce)}
+.bouton-blanc:hover{transform:translateY(-2px);box-shadow:var(--ombre-forte)}
+.bouton-vert{background:#fff;color:var(--vert-fonce);border:2px solid var(--vert)}
+.bouton-vert:hover{background:var(--vert);color:#fff}
+.bouton-grand{font-size:18px;padding:16px 34px}
+.en-tete{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--bordure)}
+.en-tete-interieur{display:flex;align-items:center;gap:var(--sp-2);padding:12px var(--sp-3)}
+.logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none;flex:0 0 auto}
+.logo svg{width:32px;height:32px}
+.logo span{font-weight:700;font-size:22px;text-transform:uppercase;letter-spacing:.03em;color:var(--encre)}
+.en-tete-cta{margin-left:auto;padding:11px 20px;min-height:auto;font-size:14px;border-radius:var(--rayon);flex:0 0 auto}
+.menu{position:relative}
+.menu-bouton{list-style:none;cursor:pointer;font-weight:600;text-transform:uppercase;font-size:14px;padding:10px 14px;border:1px solid var(--bordure);border-radius:var(--rayon);min-height:44px;display:inline-flex;align-items:center}
+.menu-bouton::-webkit-details-marker{display:none}
+.menu-nav{flex-direction:column;gap:4px;position:absolute;top:calc(100% + 8px);left:0;min-width:210px;background:#fff;border:1px solid var(--bordure);border-radius:var(--rayon);box-shadow:var(--ombre-forte);padding:8px;z-index:60}
+.menu[open] .menu-nav{display:flex}
+.menu-nav a{text-transform:uppercase;font-size:14px;padding:12px;border-radius:6px;text-decoration:none;color:var(--encre)}
+.menu-nav a:hover{background:var(--coquille)}
+.hero{background:var(--rouge);overflow:hidden;padding:0}
+.hero-interieur{display:grid;grid-template-columns:1.05fr .95fr;align-items:stretch;min-height:clamp(440px,56vh,560px)}
+.hero-texte{display:flex;flex-direction:column;justify-content:center;padding:64px 48px 64px 0;color:#fff;position:relative;z-index:2}
+.eyebrow-clair{color:#ffd7da}
+.hero-promesse{font-size:18px;color:#ffe3e5;max-width:42ch;margin:var(--sp-2) 0 var(--sp-4)}
+.hero-actions{display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap}
+.lien-clair{font-weight:600;text-transform:uppercase;font-size:15px;letter-spacing:.04em;color:#fff;text-decoration:none;border-bottom:2px solid var(--vert-vif);padding-bottom:3px;white-space:nowrap}
+.hero-visuel{position:relative;overflow:hidden}
+.hero-visuel .photo{position:absolute;inset:0;border-radius:0;clip-path:polygon(13% 0, 100% 0, 100% 100%, 0% 100%)}
+.hero-visuel::after{content:"";position:absolute;inset:0;background:var(--rouge-fonce);clip-path:polygon(13% 0, 16.5% 0, 3.5% 100%, 0% 100%);z-index:2}
+.bandeau-chiffres{padding:0;border-bottom:1px solid var(--bordure)}
+.grille-chiffres{display:flex;flex-wrap:wrap}
+.chiffre{flex:1;min-width:150px;padding:var(--sp-4) var(--sp-3);border-right:1px solid var(--bordure);text-align:center}
+.chiffre:last-child{border-right:none}
+.chiffre b{display:block;font-weight:700;font-size:clamp(34px,5vw,44px);line-height:1;color:var(--rouge)}
+.chiffre b::after{content:"";display:block;width:26px;height:3px;background:var(--vert);border-radius:2px;margin:8px auto 0}
+.chiffre span{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--gris)}
+.acces-rapides{padding-top:var(--sp-8);padding-bottom:var(--sp-6)}
+.grille-rapide{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-2)}
+.carte-rapide{display:flex;flex-direction:column;gap:6px;text-decoration:none;background:#fff;border:1px solid var(--bordure);border-radius:var(--rayon);padding:var(--sp-3);box-shadow:var(--ombre);transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.carte-rapide:hover{transform:translateY(-4px);box-shadow:var(--ombre-forte);border-color:#f3c9cd}
+.ico{width:30px;height:30px;color:var(--rouge);margin-bottom:4px}
+.carte-titre{font-weight:600;font-size:18px;text-transform:uppercase;color:var(--encre)}
+.carte-sous{font-size:14px;color:var(--gris)}
+.club-bref{background:var(--coquille)}
+.club-bref-interieur{max-width:680px}
+.club-bref p{color:var(--gris);margin:0 0 var(--sp-4)}
+.grille-equipes{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2);margin-top:var(--sp-3)}
+.carte-equipe{display:flex;flex-direction:column;gap:6px;text-decoration:none;background:#fff;border:1px solid var(--bordure);border-radius:var(--rayon);padding:var(--sp-3);color:var(--gris);position:relative;overflow:hidden;box-shadow:var(--ombre);transition:transform .15s ease,box-shadow .15s ease}
+.carte-equipe::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--rouge);transform:scaleY(0);transform-origin:top;transition:transform .2s ease}
+.carte-equipe:hover{transform:translateY(-4px);box-shadow:var(--ombre-forte)}
+.carte-equipe:hover::before{transform:scaleY(1)}
+.badge-age{font-weight:600;font-size:20px;text-transform:uppercase;color:var(--encre)}
+.grille-actus{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);margin-top:var(--sp-3)}
+.carte-actu{background:#fff;border:1px solid var(--bordure);border-radius:var(--rayon);overflow:hidden;box-shadow:var(--ombre);transition:transform .15s ease,box-shadow .15s ease}
+.carte-actu:hover{transform:translateY(-4px);box-shadow:var(--ombre-forte)}
+.actu-media{min-height:170px;border-radius:0}
+.actu-corps{padding:var(--sp-3)}
+.actu-date{display:block;font-size:13px;color:var(--gris);margin-bottom:6px}
+.actu-corps h3{font-weight:600;font-size:19px;text-transform:uppercase;line-height:1.05;margin-bottom:var(--sp-2)}
+.lien-actu{font-weight:600;text-transform:uppercase;font-size:14px;letter-spacing:.03em;color:var(--rouge);text-decoration:none}
+.lien-actu:hover{text-decoration:underline}
+.actus-lien{margin-top:var(--sp-4);text-align:center}
+.inscriptions{background:var(--vert)}
+.inscriptions-interieur{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);flex-wrap:wrap}
+.titre-blanc{color:#fff}
+.inscriptions p{color:#eaffef;max-width:50ch;margin-top:var(--sp-1)}
+.grille-logos{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-2);margin-top:var(--sp-3)}
+.logo-partenaire{display:flex;align-items:center;justify-content:center;background:var(--coquille);border:1px solid var(--bordure);border-radius:var(--rayon);min-height:90px;color:var(--gris);font-weight:500;filter:grayscale(1);opacity:.75}
+.newsletter{background:var(--coquille)}
+.newsletter-interieur{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6);align-items:center;background:#fff;border:1px solid var(--bordure);border-radius:var(--rayon);padding:var(--sp-6);box-shadow:var(--ombre)}
+.newsletter p{color:var(--gris);margin-top:var(--sp-1)}
+.form-label{display:block;font-weight:600;margin-bottom:var(--sp-1)}
+.form-ligne{display:flex;gap:var(--sp-2);flex-wrap:wrap}
+.form-champ{flex:1;min-width:0;font-family:'Inter';font-size:16px;padding:14px 16px;border:1px solid var(--bordure);border-radius:var(--rayon);background:#fff}
+.form-champ:focus{border-color:var(--vert);outline:none;box-shadow:0 0 0 4px rgba(30,142,90,.12)}
+.form-consentement{display:flex;gap:8px;align-items:flex-start;margin-top:var(--sp-2);font-size:14px;color:var(--gris)}
+.form-consentement a{color:var(--vert-fonce)}
+.champ-piege{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.pied{background:var(--coquille);border-top:4px solid var(--rouge);padding-top:var(--sp-8)}
+.grille-pied{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-4)}
+.pied a{color:var(--gris);text-decoration:none}
+.pied a:hover{color:var(--encre);text-decoration:underline}
+.pied p{color:var(--gris)}
+.pied-titre{font-weight:600;text-transform:uppercase;color:var(--encre);margin-bottom:var(--sp-1)}
+.pied-liens{list-style:none;display:flex;flex-direction:column;gap:6px}
+.pied-bas{border-top:1px solid var(--bordure);margin-top:var(--sp-6);padding-top:var(--sp-3);padding-bottom:var(--sp-3);font-size:13px;color:var(--gris)}
+@media (min-width:760px){
+  .menu{position:static}.menu-bouton{display:none}
+  .menu-nav{position:static;flex-direction:row;border:none;box-shadow:none;padding:0;background:none;min-width:auto}
+  .menu .menu-nav{display:flex}.menu-nav a{padding:8px 4px}
+}
+@media (max-width:900px){
+  .grille-rapide{grid-template-columns:repeat(2,1fr)}
+  .grille-equipes{grid-template-columns:repeat(2,1fr)}
+  .grille-actus{grid-template-columns:repeat(3,1fr)}
+  .grille-pied{grid-template-columns:repeat(2,1fr)}
+  .hero-interieur{grid-template-columns:1fr;min-height:0}
+  .hero-texte{padding:var(--sp-8) 0 var(--sp-6);order:1}
+  .hero-visuel{order:2;aspect-ratio:16/9;border-radius:var(--rayon-img);overflow:hidden;margin-bottom:var(--sp-8)}
+  .hero-visuel .photo{position:absolute;inset:0;clip-path:none;border-radius:var(--rayon-img)}
+  .hero-visuel::after{display:none}
+  .newsletter-interieur{grid-template-columns:1fr;padding:var(--sp-4)}
+}
+@media (max-width:560px){
+  section{padding:var(--sp-6) 0}
+  .en-tete-interieur{gap:10px;padding:10px var(--sp-2)}
+  .logo span{font-size:20px}.en-tete-cta{padding:10px 14px;font-size:13px}.menu-bouton{padding:10px 12px}
+  .titre{font-size:clamp(36px,12vw,46px)}
+  .hero-promesse{font-size:16px}
+  .hero-actions{gap:var(--sp-2);width:100%}.hero-actions .bouton{flex:1 1 auto;text-align:center}
+  .grille-rapide{grid-template-columns:1fr 1fr}
+  .grille-equipes{grid-template-columns:1fr}
+  .grille-actus{grid-template-columns:1fr}
+  .grille-logos{grid-template-columns:1fr 1fr}
+  .grille-pied{grid-template-columns:1fr 1fr}
+  .chiffre{min-width:50%;border-bottom:1px solid var(--bordure)}.chiffre:nth-child(2n){border-right:none}
+  .inscriptions-interieur{flex-direction:column;align-items:flex-start}.inscriptions-interieur .bouton{width:100%}
+  .form-ligne{flex-direction:column;align-items:stretch}.form-ligne .bouton{width:100%}
+}
+@media (max-width:360px){
+  .conteneur{padding:0 18px}.titre{font-size:34px}.grille-rapide{grid-template-columns:1fr}.logo span{font-size:18px}
+}
+@media (max-height:480px) and (orientation:landscape){
+  .hero-texte{padding:var(--sp-6) 0}.hero-visuel{aspect-ratio:21/9}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
