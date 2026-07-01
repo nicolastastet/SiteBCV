@@ -20,10 +20,10 @@ const BUREAU = [
 const INSTITUTIONS = ["FFBB", "Ligue Occitanie", "Comité 31 Haute-Garonne"];
 
 const REPERES = [
-  { chiffre: "1984", label: "Fondation du club" },
-  { chiffre: "180", label: "licenciés aujourd'hui" },
-  { chiffre: "12", label: "équipes" },
-  { chiffre: "40 ans", label: "d'histoire" },
+  { chiffre: "1923", label: "Fondation du club" },
+  { chiffre: "200+", label: "licenciés aujourd'hui" },
+  { chiffre: "16", label: "équipes" },
+  { chiffre: "103 ans", label: "d'histoire" },
 ];
 
 const GYMNASES = [
@@ -67,7 +67,7 @@ export default function LeClub() {
           <Reveal delay={0.1}>
             <p className="mb-3 font-display text-[13px] uppercase tracking-[0.2em] text-rouge">Mot du Président</p>
             <blockquote className="border-l-4 border-vert pl-5 text-[clamp(17px,2.4vw,20px)] italic leading-relaxed text-neutral-700">
-              « Bienvenue au Basket Club Verfeillois. Depuis plus de 40 ans, notre club accueille
+              « Bienvenue au Basket Club Verfeillois. Depuis plus de 100 ans, notre club accueille
               les jeunes de Verfeil dans un esprit de respect, de progression et de plaisir du
               jeu. Notre priorité : un encadrement diplômé et bienveillant, pour que votre enfant
               s'épanouisse autant sur le terrain qu'en dehors. »
