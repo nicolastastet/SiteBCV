@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
 import SectionHero from "./SectionHero.jsx";
 import Reveal from "./Reveal.jsx";
+import PhotoAvecFallback from "./PhotoAvecFallback.jsx";
 import { FAMILLES, getEquipesParFamille } from "../data/equipes.js";
 
 // Page catégorie (niveau 2) : liste des équipes d'une famille, avec fil d'Ariane.
@@ -28,8 +29,12 @@ export default function PageCategorie({ famille }) {
                   to={`/equipes/${e.slug}`}
                   className="group flex h-full flex-col overflow-hidden rounded-xl border border-bordure bg-white shadow-[0_8px_24px_rgba(22,22,22,0.06)] transition-all hover:-translate-y-1.5 hover:border-[#f3c9cd] hover:shadow-[0_16px_40px_rgba(22,22,22,0.12)]"
                 >
-                  {/* PHOTO — à remplacer */}
-                  <div className="aspect-[4/3] bg-coquille" aria-hidden />
+                  {/* Photo d'équipe : /images/equipes/[slug].jpg — fallback "Photo à venir" sinon */}
+                  <PhotoAvecFallback
+                    src={`/images/equipes/${e.slug}.jpg`}
+                    alt={`Équipe ${e.nom}`}
+                    className="aspect-[4/3] w-full"
+                  />
                   <div className="flex flex-1 flex-col p-6">
                     <span className="font-display text-[20px] font-semibold uppercase leading-tight">{e.nom}</span>
                     {e.age && <p className="mt-1 text-[14px] text-neutral-600">{e.age}</p>}
