@@ -6,8 +6,10 @@ import { useState } from "react";
  * des photos au fil de l'eau sans jamais toucher au code : il dépose le fichier
  * au bon chemin dans public/images/, il push, la photo apparaît au prochain build.
  *
- * `className` porte les dimensions/arrondi/object-fit — appliqué aussi bien à
- * l'image qu'au placeholder pour garder exactement le même gabarit.
+ * `className` porte les dimensions/arrondi/ratio (aspect-*, h/w) — appliqué aussi
+ * bien à l'image qu'au placeholder pour garder exactement le même gabarit. Le
+ * recadrage centré (`object-cover object-center`) est garanti par le composant,
+ * pour que la photo remplisse toujours son emplacement sans déformation ni bande.
  */
 export default function PhotoAvecFallback({ src, alt, className = "" }) {
   const [erreur, setErreur] = useState(false);
@@ -28,7 +30,7 @@ export default function PhotoAvecFallback({ src, alt, className = "" }) {
     <img
       src={src}
       alt={alt}
-      className={className}
+      className={`object-cover object-center ${className}`}
       onError={() => setErreur(true)}
       loading="lazy"
     />
