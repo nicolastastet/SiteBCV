@@ -34,11 +34,11 @@ frame-ancestors 'none'; upgrade-insecure-requests
   `Referrer-Policy`, `Permissions-Policy`, `Strict-Transport-Security`,
   `Cross-Origin-Opener-Policy`, `Cross-Origin-Resource-Policy`.
 
-## Exception CSP pour /admin (Decap CMS)
+## Exception CSP pour /redaction (Decap CMS)
 
-L'interface d'administration (`/admin`, éditeur Decap CMS) a besoin d'appeler
+L'interface d'administration (`/redaction`, éditeur Decap CMS) a besoin d'appeler
 l'API GitHub et d'injecter du CSS inline dans son éditeur. Une règle `_headers`
-dédiée `/admin/*` **remplace** la CSP globale **uniquement pour cette page** :
+dédiée `/redaction/*` **remplace** la CSP globale **uniquement pour cette page** :
 
 ```
 default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline';
@@ -46,19 +46,19 @@ img-src 'self' data: https://avatars.githubusercontent.com;
 connect-src 'self' https://api.github.com https://github.com; frame-ancestors 'none'
 ```
 
-- Le bundle Decap est **auto-hébergé** (`/admin/decap-cms.js`, bundlé via npm par
+- Le bundle Decap est **auto-hébergé** (`/redaction/decap-cms.js`, bundlé via npm par
   `vite.admin.config.js`) — **jamais chargé depuis un CDN**. Le `<script>` est externe
   (`script-src 'self'`), pas inline.
 - `script-src 'unsafe-eval'` est requis : le bundle Decap contient `Function("return this")()`
   (détection du global par **lodash**, exécutée au chargement) et `eval` (**js-sha256**,
   utilisé pour les SHA Git du backend GitHub). Sans `'unsafe-eval'`, Decap plante
-  immédiatement. Assouplissement **strictement limité à `/admin`**.
+  immédiatement. Assouplissement **strictement limité à `/redaction`**.
 - `style-src 'unsafe-inline'` : nécessaire car Decap injecte son CSS au runtime.
 - `connect-src … api.github.com github.com` : backend GitHub de Decap.
-- **Le reste du site (toutes les pages hors `/admin`) conserve la CSP stricte globale**
+- **Le reste du site (toutes les pages hors `/redaction`) conserve la CSP stricte globale**
   (`script-src 'self'` sans `unsafe-eval` ni `unsafe-inline`) — l'assouplissement ne
   concerne que la page d'admin, non indexée et réservée aux bénévoles authentifiés.
-- `Cross-Origin-Opener-Policy: same-origin-allow-popups` est posé sur `/admin/*`
+- `Cross-Origin-Opener-Policy: same-origin-allow-popups` est posé sur `/redaction/*`
   (au lieu du `same-origin` global) : sans ça, l'aller-retour cross-origin de la
   popup OAuth vers GitHub couperait `window.opener` et le login échouerait à 100%.
   Le site public garde `same-origin`.

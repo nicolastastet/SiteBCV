@@ -4,7 +4,7 @@ import Reveal from "../components/Reveal.jsx";
 import Seo from "../components/Seo.jsx";
 import calendrier from "../data/calendrier.json";
 
-// Données éditables par le bénévole via Decap CMS (/admin) → src/data/calendrier.json.
+// Données éditables par le bénévole via Decap CMS (/redaction) → src/data/calendrier.json.
 const { matchsDomicile, matchsExterieur, resultats } = calendrier;
 
 /* Ligne de match (domicile ou extérieur). */

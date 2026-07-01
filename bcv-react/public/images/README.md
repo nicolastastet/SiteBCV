@@ -44,5 +44,5 @@ Un sous-dossier par article (nommé selon le slug de l'article), créé au besoi
 
 ## Uploads Decap CMS — `images/uploads/`
 
-Dossier où le CMS (`/admin`) dépose les images ajoutées via l'interface web.
+Dossier où le CMS (`/redaction`) dépose les images ajoutées via l'interface web.
 Ne pas y toucher manuellement.

@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
-Disallow: /admin
+Disallow: /redaction
+Disallow: /api
 
 Sitemap: https://basketclubverfeillois.fr/sitemap.xml
