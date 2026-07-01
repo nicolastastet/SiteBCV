@@ -236,21 +236,25 @@ frame-ancestors 'none'; upgrade-insecure-requests
 
 ## 10. Ce qui est déjà livré vs à faire
 
-### Livré (sous l'ancienne stack, sert de référence pour le portage React)
-- [x] Maquette complète de la page d'accueil (HTML + CSS), responsive vérifié — Option A validée.
-- [x] Hero avec diagonale clip-path propre, photo pleine hauteur.
-- [x] Modèle de sécurité initial documenté (obsolète, remplacé par ADR-005).
+> Mise à jour du 01/07/2026 : Phases 2, 3 et 4 terminées. Section réécrite pour refléter l'état réel du repo (l'ancienne liste "tout à faire" était obsolète).
 
-### À faire (ordre suggéré, sous la nouvelle stack React/Vite)
-1. Scaffold du projet : initialiser Vite + React, tokens de design centralisés.
-2. Porter l'Accueil en composants React à partir de la maquette validée.
-3. Auto-héberger les polices (public/fonts/), retirer tout lien Google Fonts.
-4. Mettre en place la CSP stricte (§7) en config Cloudflare Pages, vérifier au CSP Evaluator.
-5. Intégrer les vrais contenus de l'Accueil (logo, photos, chiffres, partenaires réels).
-6. Décliner les pages P1 : Le Club, Équipes, Planning, Inscriptions (page macro), Contact.
-7. Brancher Decap CMS pour le blog (config admin/config.yml, secrets en variables d'environnement).
-8. Brancher Formspree pour la newsletter (vérifier hébergement UE + anti-spam natif).
-9. Page Mentions légales / RGPD + bannière cookies + consentement parental photos — bloquant avant mise en ligne.
-10. Pages P2 : Calendrier & Résultats (data FFBB si possible).
-11. Déploiement : Cloudflare Pages + domaines, build auto sur push, vérification securityheaders.com.
-12. npm audit + Dependabot/Renovate activés dès le scaffold.
+### Livré (stack React/Vite en place)
+- [x] Scaffold Vite + React + Tailwind v4 + React Router ; tokens de design centralisés (`src/index.css` via `@theme`).
+- [x] Polices Oswald + Inter **auto-hébergées** (`public/fonts/*.woff2`), aucun Google Fonts.
+- [x] **CSP stricte** `script-src 'self'` + en-têtes sécurité (`public/_headers`, cible Cloudflare Pages).
+- [x] **Accueil** complet (hero diagonale, chiffres, accès rapides, aperçu équipes, actus, bandeau inscriptions, partenaires, newsletter).
+- [x] **Pages P1** : Le Club, Équipes (niveaux 1/2/3 + fiches), Planning, Inscriptions (macro licence), Contact.
+- [x] **Pages P2** : Calendrier & Résultats (données statiques éditables), Actualités (blog).
+- [x] **Photos d'équipe** réelles (composant `PhotoAvecFallback`, recadrage centré, images optimisées ~1600px) ; **logos d'affiliation** FFBB / Ligue Occitanie / Comité 31 intégrés.
+- [x] **Blog** : 19 articles réels migrés en Markdown, chargés dynamiquement (`import.meta.glob` + `react-markdown`).
+- [x] **SEO** : titres/descriptions par page (`react-helmet-async`), canonical, Open Graph, JSON-LD `SportsClub`/`Article`, `sitemap.xml` + `robots.txt` générés au build, aperçus sociaux fiables (Cloudflare Function anti-bot).
+- [x] **Decap CMS codé** (interface `/redaction`, bundle auto-hébergé, OAuth GitHub **avec validation anti-CSRF** via Cloudflare Functions) — **non déployé** : variables d'env OAuth + app GitHub à configurer par Nicolas.
+- [x] **Formulaires** (Inscriptions, Contact, Newsletter) : honeypot anti-bot + consentement RGPD ; confirmation côté client (backend à brancher).
+
+### À faire
+1. **Déploiement Cloudflare Pages** : configurer le projet (Root directory, build, variables d'env `GITHUB_CLIENT_ID`/`GITHUB_CLIENT_SECRET`), créer l'app OAuth GitHub, brancher les domaines, vérifier sur securityheaders.com / CSP Evaluator.
+2. **Brancher les formulaires** (Formspree ou backend) : validation serveur, CSRF, rate-limiting — newsletter, inscription, contact.
+3. **Page Mentions légales / RGPD** + consentement parental pour les photos de mineurs — **bloquant avant mise en ligne publique**.
+4. **Contenus restants** : vrai numéro de téléphone, photos manquantes (U13 Filles, U13 Garçons, U18 Filles, coachs, bureau), vrais logos partenaires, lien HelloAsso.
+5. **Retirer `picsum.photos`** de la CSP `img-src` une fois les dernières images placeholder de l'Accueil remplacées par de vraies photos.
+6. **npm audit / Dependabot** en continu ; bump majeur de Vite (alerte esbuild, dev-only, non bloquant) à planifier.
