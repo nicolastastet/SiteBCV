@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
+import PhotoAvecFallback from "../components/PhotoAvecFallback.jsx";
 import { articles } from "../data/articles.js";
 import { CATEGORIES, formatDateFr } from "../lib.js";
 
@@ -58,8 +59,8 @@ export default function Actus() {
                   key={a.slug}
                   className={`${VISIBILITE[a.categorie]} flex-col overflow-hidden rounded-xl border border-bordure shadow-[0_8px_24px_rgba(22,22,22,0.06)]`}
                 >
-                  {/* PHOTO — à remplacer */}
-                  <div className="aspect-video bg-coquille" aria-hidden />
+                  {/* Image à la une de l'article */}
+                  <PhotoAvecFallback src={a.image} alt={a.titre} className="aspect-video w-full" />
                   <div className="flex flex-1 flex-col p-6">
                     <span className={`inline-flex w-fit items-center rounded-full px-3 py-1 font-display text-[11px] uppercase tracking-wide ${cat.badge}`}>
                       {cat.label}

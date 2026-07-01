@@ -1,10 +1,25 @@
 import { useParams, Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { IconArrowLeft, IconBrandFacebook, IconBrandWhatsapp } from "@tabler/icons-react";
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
+import PhotoAvecFallback from "../components/PhotoAvecFallback.jsx";
 import BlocNewsletter from "../components/BlocNewsletter.jsx";
 import { getArticle } from "../data/articles.js";
 import { CATEGORIES, formatDateFr } from "../lib.js";
+
+// Rendu Markdown → éléments React (aucun dangerouslySetInnerHTML, aucun eval → CSP 'self' OK).
+// Les liens externes reçoivent target/rel de sécurité ; les images sont lazy-loadées.
+const composantsMd = {
+  a: ({ href = "", children }) =>
+    /^https?:\/\//i.test(href) ? (
+      <a href={href} target="_blank" rel="noopener noreferrer">{children}</a>
+    ) : (
+      <a href={href}>{children}</a>
+    ),
+  img: ({ src = "", alt = "" }) => <img src={src} alt={alt} loading="lazy" />,
+};
 
 export default function ArticlePage() {
   const { slug } = useParams();
@@ -54,18 +69,21 @@ export default function ArticlePage() {
             </div>
           </Reveal>
 
-          {/* Image principale — placeholder */}
+          {/* Image à la une */}
           <Reveal>
-            {/* PHOTO — à remplacer */}
-            <div className="mt-6 aspect-[16/9] w-full rounded-[10px] bg-coquille" aria-hidden />
+            <PhotoAvecFallback
+              src={article.image}
+              alt={article.titre}
+              className="mt-6 aspect-[16/9] w-full rounded-[10px]"
+            />
           </Reveal>
 
-          {/* Corps */}
+          {/* Corps de l'article (Markdown rendu en éléments React) */}
           <Reveal>
-            <div className="mt-8 grid gap-5">
-              {article.corps.map((p, i) => (
-                <p key={i} className="text-[17px] leading-relaxed text-neutral-700">{p}</p>
-              ))}
+            <div className="prose-bcv mt-8">
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={composantsMd}>
+                {article.body}
+              </ReactMarkdown>
             </div>
           </Reveal>
 
