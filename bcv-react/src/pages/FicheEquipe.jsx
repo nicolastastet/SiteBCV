@@ -72,11 +72,7 @@ export default function FicheEquipe() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.1}>
-            <div className="mt-6">
-              <BlocInfo icon={IconUsers} titre="Effectif" />
-            </div>
-          </Reveal>
+          {/* Aucune liste de joueurs affichée — protection des mineurs (RGPD). */}
 
           {/* CTA */}
           <Reveal delay={0.15}>
