@@ -10,6 +10,7 @@ export const FAMILLES = {
 export const EQUIPES = [
   // Mini Basket
   { slug: "u7-u9", nom: "U7-U9", age: "5 à 8 ans", famille: "mini-basket" },
+  { slug: "u11-mixte", nom: "U11 Mixte", age: "9-10 ans", famille: "mini-basket" },
   { slug: "u11-filles", nom: "U11 Filles", age: "9-10 ans", famille: "mini-basket" },
   { slug: "u11-garcons", nom: "U11 Garçons", age: "9-10 ans", famille: "mini-basket" },
   // Jeunes
