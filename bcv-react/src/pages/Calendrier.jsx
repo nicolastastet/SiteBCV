@@ -1,7 +1,10 @@
 import { IconHome, IconBus, IconTrophy, IconMapPin, IconArrowNarrowRight } from "@tabler/icons-react";
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
-import { matchsDomicile, matchsExterieur, resultats } from "../data/calendrier.js";
+import calendrier from "../data/calendrier.json";
+
+// Données éditables par le bénévole via Decap CMS (/admin) → src/data/calendrier.json.
+const { matchsDomicile, matchsExterieur, resultats } = calendrier;
 
 /* Ligne de match (domicile ou extérieur). */
 function LigneMatch({ m, exterieur = false }) {

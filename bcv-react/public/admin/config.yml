@@ -1,0 +1,69 @@
+backend:
+  name: github
+  repo: nicolastastet/SiteBCV
+  branch: main
+  base_url: https://basketclubverfeillois.fr
+  auth_endpoint: api/auth
+
+media_folder: "bcv-react/public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "actualites"
+    label: "Actualités"
+    folder: "bcv-react/src/content/articles"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titre", name: "titre", widget: "string" }
+      - label: "Catégorie"
+        name: "categorie"
+        widget: "select"
+        options:
+          - { label: "Récits du week-end", value: "recits" }
+          - { label: "Vie du club", value: "vie-club" }
+          - { label: "Galerie Photos", value: "galerie" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Image principale", name: "image", widget: "image", required: false }
+      - { label: "Extrait", name: "extrait", widget: "text" }
+      - { label: "Corps de l'article", name: "body", widget: "markdown" }
+
+  - name: "calendrier"
+    label: "Calendrier"
+    files:
+      - label: "Semaine en cours"
+        name: "semaine"
+        file: "bcv-react/src/data/calendrier.json"
+        fields:
+          - label: "Matchs à domicile"
+            name: "matchsDomicile"
+            widget: "list"
+            summary: "{{fields.jour}} {{fields.heure}} — {{fields.equipe}} vs {{fields.adversaire}}"
+            fields:
+              - { label: "Jour", name: "jour", widget: "select", options: ["Samedi", "Dimanche"] }
+              - { label: "Heure", name: "heure", widget: "string", hint: "Format : 14h00" }
+              - { label: "Équipe", name: "equipe", widget: "string" }
+              - { label: "Adversaire", name: "adversaire", widget: "string" }
+          - label: "Matchs à l'extérieur"
+            name: "matchsExterieur"
+            widget: "list"
+            summary: "{{fields.jour}} {{fields.heure}} — {{fields.equipe}} vs {{fields.adversaire}}"
+            fields:
+              - { label: "Jour", name: "jour", widget: "select", options: ["Samedi", "Dimanche"] }
+              - { label: "Heure", name: "heure", widget: "string" }
+              - { label: "Équipe", name: "equipe", widget: "string" }
+              - { label: "Adversaire", name: "adversaire", widget: "string" }
+              - { label: "Lieu (nom du gymnase adverse)", name: "lieu", widget: "string", hint: "Ex: Gymnase de Rangueil" }
+              - { label: "Adresse GPS (pour le lien Google Maps)", name: "adresseGPS", widget: "string", hint: "Ex: Gymnase+Rangueil+Toulouse" }
+          - label: "Résultats du week-end passé"
+            name: "resultats"
+            widget: "list"
+            summary: "{{fields.equipe}} — {{fields.resultat}} {{fields.score}}"
+            fields:
+              - { label: "Équipe", name: "equipe", widget: "string" }
+              - label: "Résultat"
+                name: "resultat"
+                widget: "select"
+                options: ["Victoire", "Défaite"]
+              - { label: "Score", name: "score", widget: "string", hint: "Format : 54 - 48" }
+              - { label: "Adversaire", name: "adversaire", widget: "string" }

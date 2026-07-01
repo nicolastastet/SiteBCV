@@ -34,6 +34,50 @@ frame-ancestors 'none'; upgrade-insecure-requests
   `Referrer-Policy`, `Permissions-Policy`, `Strict-Transport-Security`,
   `Cross-Origin-Opener-Policy`, `Cross-Origin-Resource-Policy`.
 
+## Exception CSP pour /admin (Decap CMS)
+
+L'interface d'administration (`/admin`, éditeur Decap CMS) a besoin d'appeler
+l'API GitHub et d'injecter du CSS inline dans son éditeur. Une règle `_headers`
+dédiée `/admin/*` **remplace** la CSP globale **uniquement pour cette page** :
+
+```
+default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline';
+img-src 'self' data: https://avatars.githubusercontent.com;
+connect-src 'self' https://api.github.com https://github.com; frame-ancestors 'none'
+```
+
+- Le bundle Decap est **auto-hébergé** (`/admin/decap-cms.js`, bundlé via npm par
+  `vite.admin.config.js`) — **jamais chargé depuis un CDN**. Le `<script>` est externe
+  (`script-src 'self'`), pas inline.
+- `script-src 'unsafe-eval'` est requis : le bundle Decap contient `Function("return this")()`
+  (détection du global par **lodash**, exécutée au chargement) et `eval` (**js-sha256**,
+  utilisé pour les SHA Git du backend GitHub). Sans `'unsafe-eval'`, Decap plante
+  immédiatement. Assouplissement **strictement limité à `/admin`**.
+- `style-src 'unsafe-inline'` : nécessaire car Decap injecte son CSS au runtime.
+- `connect-src … api.github.com github.com` : backend GitHub de Decap.
+- **Le reste du site (toutes les pages hors `/admin`) conserve la CSP stricte globale**
+  (`script-src 'self'` sans `unsafe-eval` ni `unsafe-inline`) — l'assouplissement ne
+  concerne que la page d'admin, non indexée et réservée aux bénévoles authentifiés.
+- `Cross-Origin-Opener-Policy: same-origin-allow-popups` est posé sur `/admin/*`
+  (au lieu du `same-origin` global) : sans ça, l'aller-retour cross-origin de la
+  popup OAuth vers GitHub couperait `window.opener` et le login échouerait à 100%.
+  Le site public garde `same-origin`.
+- Le token OAuth est échangé côté serveur par des **Cloudflare Pages Functions**
+  (`functions/api/auth.js`, `functions/api/callback.js`). La page popup de callback
+  sert une CSP dédiée `default-src 'none'; script-src 'unsafe-inline'` + `COOP: unsafe-none`
+  (uniquement le script de handshake `postMessage`). Le handshake est **restreint à
+  l'origine du site** : la popup ne répond qu'aux messages de cette origine et n'émet
+  le token que vers elle (`targetOrigin` explicite, jamais `"*"`) → pas d'exfiltration
+  possible vers un opener tiers. `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET` sont des
+  **variables d'environnement Cloudflare, jamais committées**.
+
+> ⚠️ **Déploiement Cloudflare Pages** : les Functions (`functions/` à la racine du
+> dépôt) ne sont détectées que si le **Root directory** du projet Cloudflare Pages est
+> la racine du dépôt (avec Build command `cd bcv-react && npm run build` et Output
+> directory `bcv-react/dist`). Si le Root directory est `bcv-react`, déplacer
+> `functions/` dans `bcv-react/functions/`. Sans ça, `/api/auth` et `/api/callback`
+> renvoient 404 et l'authentification CMS est inopérante.
+
 ## Polices auto-hébergées (RGPD)
 
 Les polices Oswald + Inter sont **auto-hébergées** dans `bcv-react/public/fonts/`
