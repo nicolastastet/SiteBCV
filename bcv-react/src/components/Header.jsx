@@ -8,6 +8,8 @@ const LIENS = [
   { label: "Le Club", to: "/le-club" },
   { label: "Équipes", to: "/equipes" },
   { label: "Planning", to: "/planning" },
+  { label: "Calendrier", to: "/calendrier" },
+  { label: "Actus", to: "/actus" },
   { label: "Contact", to: "/contact" },
 ];
 

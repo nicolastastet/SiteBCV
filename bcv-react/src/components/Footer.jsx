@@ -17,10 +17,15 @@ export default function Footer() {
       <div className="mx-auto grid max-w-[1180px] gap-10 px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <img src={LOGO} alt="Basket Club Verfeillois" className="mb-4 h-14 w-auto" />
-          <p className="text-[14px] text-neutral-600">Gymnase municipal<br />31590 Verfeil</p>
+          <p className="max-w-[34ch] text-[14px] font-medium text-encre">
+            Basket Club Verfeillois – La passion, le jeu, la famille.
+          </p>
+          <p className="mt-4 text-[14px] text-neutral-600">3 rue Vauraise, 31590 Verfeil</p>
           <a href="mailto:contact@bcv-verfeil.fr" className="mt-2 inline-block text-[14px] text-neutral-600 hover:text-encre">
             contact@bcv-verfeil.fr
           </a>
+          {/* TODO : remplacer par le vrai numéro */}
+          <p className="mt-1 text-[14px] text-neutral-600">06 XX XX XX XX</p>
         </div>
 
         <div>
@@ -33,6 +38,10 @@ export default function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              {/* TODO Phase 4 : page Mentions légales */}
+              <a href="#" className="text-[14px] text-neutral-600 hover:text-encre hover:underline">Mentions légales</a>
+            </li>
           </ul>
         </div>
 
@@ -40,15 +49,15 @@ export default function Footer() {
           <p className="mb-3 font-display text-[14px] font-semibold uppercase text-encre">Suivez-nous</p>
           <ul className="flex flex-col gap-1.5">
             <li>
-              {/* TODO : URL Facebook BCV */}
-              <a href="#" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[14px] text-neutral-600 hover:text-encre hover:underline">
-                <IconBrandFacebook className="h-4 w-4" /> Facebook
-              </a>
-            </li>
-            <li>
               {/* TODO : URL Instagram BCV */}
               <a href="#" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[14px] text-neutral-600 hover:text-encre hover:underline">
                 <IconBrandInstagram className="h-4 w-4" /> Instagram
+              </a>
+            </li>
+            <li>
+              {/* TODO : URL Facebook BCV */}
+              <a href="#" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[14px] text-neutral-600 hover:text-encre hover:underline">
+                <IconBrandFacebook className="h-4 w-4" /> Facebook
               </a>
             </li>
           </ul>

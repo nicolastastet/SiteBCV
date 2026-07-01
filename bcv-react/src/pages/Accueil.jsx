@@ -1,23 +1,21 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   motion,
   useReducedMotion,
-  animate,
   useScroll,
   useTransform,
-  useMotionValue,
 } from "motion/react";
 import {
-  IconCalendarEvent,
+  IconCalendar,
   IconTrophy,
   IconMail,
-  IconClipboardList,
+  IconClipboard,
   IconArrowRight,
   IconArrowNarrowRight,
-  IconChevronLeft,
-  IconChevronRight,
   IconMapPin,
+  IconBallBasketball,
+  IconRun,
 } from "@tabler/icons-react";
 import Reveal from "../components/Reveal.jsx";
 import Stat from "../components/Stat.jsx";
@@ -32,7 +30,7 @@ function Hero() {
   const yImg = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 120]);
   const scaleImg = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.12]);
   const yLogo = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -60]);
-  const words = ["Le", "basket"];
+  const words = ["Le", "basket", "à"];
   return (
     <section ref={ref} className="relative overflow-hidden bg-rouge">
       {/* Conteneur plafonné : au-delà de ~1800px le fond rouge remplit, le layout reste centré (évite l'étirement sur écrans ultra-larges) */}
@@ -97,17 +95,25 @@ function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.32, ease: EASE }}
               >
-                à Verfeil
+                Verfeil
               </motion.span>
             </h1>
             <motion.p
               initial={reduce ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.42, ease: EASE }}
-              className="mt-5 max-w-[40ch] text-[clamp(17px,2.2vw,19px)] leading-relaxed text-[#ffe3e5]"
+              transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
+              className="mt-5 font-display text-[clamp(15px,2vw,18px)] uppercase tracking-wide text-white"
             >
-              Du mini-basket aux seniors. On joue, on progresse, on gagne ensemble.
-              Saison 2026-2027 : inscriptions ouvertes.
+              Le basket à Verfeil, pour tous, depuis 1923
+            </motion.p>
+            <motion.p
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.48, ease: EASE }}
+              className="mt-3 max-w-[46ch] text-[clamp(17px,2.2vw,19px)] leading-relaxed text-[#ffe3e5]"
+            >
+              De l'école de basket aux équipes Seniors, rejoignez un club familial où
+              convivialité rime avec esprit de compétition.
             </motion.p>
             <motion.div
               initial={reduce ? false : { opacity: 0, y: 16 }}
@@ -122,10 +128,10 @@ function Hero() {
                 Rejoindre le club
               </Link>
               <Link
-                to="/planning"
+                to="/equipes"
                 className="group inline-flex items-center gap-2 border-b-2 border-vert-vif pb-1 font-display text-[15px] uppercase tracking-wide text-white transition-colors hover:text-vert-vif"
               >
-                Voir les créneaux
+                Découvrir les équipes
                 <IconArrowNarrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </motion.div>
@@ -156,59 +162,45 @@ function Stats() {
   return (
     <section className="border-b border-bordure" aria-label="Le club en chiffres">
       <div className="mx-auto flex max-w-[1180px] flex-wrap px-6">
-        <Stat value={180} label="licenciés" />
-        <Stat value={12} label="équipes" />
-        <Stat value={40} label="ans d'existence" />
-        <Stat value={8} label="éducateurs diplômés" />
+        <Stat value={200} suffix="+" label="Licenciés" />
+        <Stat value={16} label="Équipes engagées" />
+        <Stat value={103} label="Années d'histoire" />
+        <Stat value={2} label="Gymnases pour s'entraîner" />
       </div>
     </section>
   );
 }
 
-/* ---------- Accès rapides (bento) ---------- */
+/* ---------- Accès rapides (4 blocs) ---------- */
 function Bento() {
   const cards = [
-    {
-      titre: "Inscriptions",
-      sous: "Tarifs, démarches et permanences de septembre",
-      icon: IconClipboardList,
-      to: "/inscriptions",
-      cls: "md:col-span-2 md:row-span-2 bg-rouge text-white hover:bg-rouge-fonce justify-between",
-      big: true,
-    },
-    { titre: "Planning", sous: "Horaires d'entraînement", icon: IconCalendarEvent, to: "/planning", cls: "bg-white" },
-    {
-      titre: "Prochains matchs",
-      sous: "Calendrier & résultats",
-      icon: IconTrophy,
-      to: "/#actus",
-      cls: "bg-vert text-white hover:bg-vert-fonce",
-      green: true,
-    },
-    { titre: "Contact", sous: "Qui contacter ?", icon: IconMail, to: "/contact", cls: "bg-white" },
+    { titre: "Planning d'entraînement", sous: "Horaires d'entraînement", icon: IconCalendar, to: "/planning" },
+    { titre: "Prochains matchs", sous: "Calendrier & résultats", icon: IconTrophy, to: "/calendrier" },
+    { titre: "Contact", sous: "Qui contacter ?", icon: IconMail, to: "/contact" },
+    { titre: "Inscriptions", sous: "Tarifs & démarches", icon: IconClipboard, to: "/inscriptions", rouge: true },
   ];
   return (
     <section className="py-20 md:py-28">
       <div className="mx-auto max-w-[1180px] px-6">
-        <div className="grid auto-rows-[minmax(150px,auto)] grid-cols-1 gap-4 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
           {cards.map((c, i) => {
             const Icon = c.icon;
-            const dark = c.big || c.green;
+            const rouge = c.rouge;
             return (
-              <Reveal key={c.titre} delay={i * 0.06} className={c.cls.includes("col-span-2") ? "md:col-span-2 md:row-span-2" : ""}>
+              <Reveal key={c.titre} delay={i * 0.06}>
                 <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.25, ease: EASE }} className="h-full">
                   <Link
                     to={c.to}
-                    className={`flex h-full flex-col gap-1.5 rounded-xl border p-7 shadow-[0_8px_24px_rgba(22,22,22,0.06)] ${
-                      dark ? "border-transparent" : "border-bordure hover:border-[#f3c9cd]"
-                    } ${c.cls}`}
+                    className={`flex h-full min-h-[160px] flex-col gap-1.5 rounded-xl border p-7 shadow-[0_8px_24px_rgba(22,22,22,0.06)] ${
+                      rouge ? "border-transparent bg-rouge text-white hover:bg-rouge-fonce" : "border-bordure bg-white hover:border-[#f3c9cd]"
+                    }`}
                   >
-                    <Icon className={`${c.big ? "h-9 w-9" : "h-7 w-7"} ${dark ? "text-white" : "text-rouge"}`} stroke={1.7} />
-                    <div className={c.big ? "mt-auto" : ""}>
-                      <span className={`font-display uppercase leading-tight ${c.big ? "text-[clamp(24px,3vw,34px)]" : "text-[19px]"} ${dark ? "text-white" : "text-encre"}`}>
+                    <Icon className={`h-8 w-8 ${rouge ? "text-white" : "text-rouge"}`} stroke={1.7} />
+                    <div className="mt-auto">
+                      <span className={`font-display text-[19px] uppercase leading-tight ${rouge ? "text-white" : "text-encre"}`}>
                         {c.titre}
                       </span>
-                      <p className={`text-[14px] ${c.big ? "text-[#ffd7da]" : c.green ? "text-[#eaffef]" : "text-neutral-500"}`}>
+                      <p className={`text-[14px] ${rouge ? "text-[#ffd7da]" : "text-neutral-500"}`}>
                         {c.sous}
                       </p>
                     </div>
@@ -240,10 +232,12 @@ function Club() {
           <h2 className="font-display text-[clamp(28px,4.4vw,44px)] font-bold uppercase leading-none tracking-tight">
             Un club familial, sportif & éducatif
           </h2>
-          <p className="mt-5 max-w-[55ch] text-[17px] leading-relaxed text-neutral-600">
-            Depuis 1984, le BCV fait grandir les jeunes de Verfeil sur et en dehors du terrain.
-            Encadrement diplômé, esprit d'équipe et bonne humeur : ici, on vient progresser autant
-            que se faire des amis.
+          <p className="mt-5 max-w-[58ch] text-[17px] leading-relaxed text-neutral-600">
+            Fondé sur des valeurs de respect, de solidarité et de partage, le Basket Club
+            Verfeillois est une véritable institution locale. Au-delà des résultats sur le
+            terrain, notre projet est d'accompagner et de former des joueurs épanouis dans un
+            cadre profondément familial. Venez transpirer, progresser et vibrer avec nous sur
+            les parquets !
           </p>
           <Link
             to="/le-club"
@@ -257,167 +251,103 @@ function Club() {
   );
 }
 
-/* ---------- Aperçu équipes (carrousel draggable) ---------- */
+/* ---------- Aperçu équipes / catégories (3 vignettes) ---------- */
 function ApercuEquipes() {
-  const eq = [
-    { age: "Baby / U7", det: "3 à 6 ans", seed: "baby" },
-    { age: "U9 · U11", det: "7 à 10 ans", seed: "u9" },
-    { age: "U13 · U15", det: "11 à 14 ans", seed: "u13" },
-    { age: "U17 · U18", det: "15 à 17 ans", seed: "u17" },
-    { age: "Seniors", det: "18 ans et +", seed: "seniors" },
-    { age: "Loisir", det: "Tous niveaux", seed: "loisir" },
+  const familles = [
+    {
+      nom: "Mini Basket",
+      desc: "Apprendre les bases du jeu et se développer en s'amusant dès le plus jeune âge.",
+      to: "/equipes/mini-basket",
+      icon: IconBallBasketball,
+    },
+    {
+      nom: "Les Jeunes",
+      desc: "Se perfectionner, forger son esprit d'équipe et goûter à l'adrénaline de la compétition.",
+      to: "/equipes/jeunes",
+      icon: IconRun,
+    },
+    {
+      nom: "Pôle Seniors",
+      desc: "Du basket intense sur le terrain, suivi de nos troisièmes mi-temps au club-house !",
+      to: "/equipes/seniors",
+      icon: IconTrophy,
+    },
   ];
-  const viewportRef = useRef(null);
-  const trackRef = useRef(null);
-  const x = useMotionValue(0);
-  const [maxDrag, setMaxDrag] = useState(0);
-
-  // Calcule la distance de défilement possible (largeur du rail - largeur visible)
-  useEffect(() => {
-    const calc = () => {
-      if (!viewportRef.current || !trackRef.current) return;
-      const diff = trackRef.current.scrollWidth - viewportRef.current.offsetWidth;
-      setMaxDrag(diff > 0 ? diff : 0);
-    };
-    calc();
-    window.addEventListener("resize", calc);
-    return () => window.removeEventListener("resize", calc);
-  }, []);
-
-  // Flèches : avance/recule d'une carte (256px = 240 + 16 de gap)
-  const move = (dir) => {
-    const target = Math.max(-maxDrag, Math.min(0, x.get() - dir * 256));
-    animate(x, target, { duration: 0.5, ease: EASE });
-  };
-
   return (
-    <section id="equipes" className="overflow-hidden py-20 md:py-28">
+    <section id="equipes" className="py-20 md:py-28">
       <div className="mx-auto max-w-[1180px] px-6">
         <Reveal>
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <h2 className="font-display text-[clamp(28px,4.4vw,44px)] font-bold uppercase leading-none tracking-tight">
-                Trouvez la catégorie de votre enfant
-              </h2>
-              <p className="mt-4 max-w-[60ch] text-[17px] text-neutral-600">
-                Du baby-basket aux seniors, chaque âge a son équipe. Faites glisser ou utilisez les flèches.
-              </p>
-            </div>
-            {/* Flèches de navigation (cachées sur mobile, le drag suffit) */}
-            <div className="hidden shrink-0 gap-3 sm:flex">
-              <button
-                onClick={() => move(-1)}
-                aria-label="Catégorie précédente"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-bordure text-encre transition-colors hover:border-rouge hover:text-rouge"
-              >
-                <IconChevronLeft className="h-5 w-5" />
-              </button>
-              <button
-                onClick={() => move(1)}
-                aria-label="Catégorie suivante"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-bordure text-encre transition-colors hover:border-rouge hover:text-rouge"
-              >
-                <IconChevronRight className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
+          <h2 className="font-display text-[clamp(28px,4.4vw,44px)] font-bold uppercase leading-none tracking-tight">
+            Trouvez la catégorie de votre enfant
+          </h2>
         </Reveal>
-
-        <div ref={viewportRef} className="mt-8 overflow-hidden">
-          <motion.div
-            ref={trackRef}
-            drag="x"
-            dragConstraints={{ left: -maxDrag, right: 0 }}
-            dragElastic={0.08}
-            style={{ x }}
-            className="flex cursor-grab gap-4 active:cursor-grabbing"
-          >
-            {eq.map((e) => (
-              <motion.div
-                key={e.age}
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.25, ease: EASE }}
-                className="shrink-0"
-              >
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {familles.map((f, i) => {
+            const Icon = f.icon;
+            return (
+              <Reveal key={f.nom} delay={i * 0.08}>
                 <Link
-                  to="/equipes"
-                  className="group relative block h-64 w-[240px] overflow-hidden rounded-xl border border-bordure shadow-[0_8px_24px_rgba(22,22,22,0.06)]"
+                  to={f.to}
+                  className="group flex h-full flex-col overflow-hidden rounded-xl border border-bordure bg-white shadow-[0_8px_24px_rgba(22,22,22,0.06)] transition-all hover:-translate-y-1.5 hover:border-[#f3c9cd] hover:shadow-[0_16px_40px_rgba(22,22,22,0.12)]"
                 >
-                  <img
-                    src={img(`bcv-${e.seed}`, 480, 520)}
-                    alt={`Catégorie ${e.age}`}
-                    draggable={false}
-                    className="pointer-events-none absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-encre/85 via-encre/20 to-transparent" />
-                  <span className="absolute left-0 top-0 h-full w-1 origin-top scale-y-0 bg-rouge transition-transform duration-300 group-hover:scale-y-100" />
-                  <div className="absolute bottom-0 p-5 text-white">
-                    <span className="font-display text-[22px] font-semibold uppercase">{e.age}</span>
-                    <p className="text-[14px] text-white/80">{e.det}</p>
+                  {/* PHOTO — à remplacer */}
+                  <div className="flex aspect-[16/10] items-center justify-center bg-coquille">
+                    <Icon className="h-14 w-14 text-rouge" stroke={1.4} />
+                  </div>
+                  <div className="flex flex-1 flex-col p-7">
+                    <span className="font-display text-[clamp(20px,2.6vw,26px)] font-bold uppercase leading-none tracking-tight">
+                      {f.nom}
+                    </span>
+                    <p className="mt-3 text-[16px] leading-relaxed text-neutral-600">{f.desc}</p>
+                    <span className="mt-5 inline-flex items-center gap-1 font-display text-[14px] uppercase tracking-wide text-rouge">
+                      Découvrir
+                      <IconArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
                   </div>
                 </Link>
-              </motion.div>
-            ))}
-          </motion.div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------- Dernières actualités ---------- */
+/* ---------- Les coulisses du BCV (actualités) ---------- */
 function Actus() {
+  {/* TODO Phase 4 : remplacer par données Decap CMS */}
+  const articles = [
+    { t: "Résumé du week-end", d: "Date à venir" },
+    { t: "Vie du club", d: "Date à venir" },
+    { t: "Galerie photos", d: "Date à venir" },
+  ];
   return (
     <section id="actus" className="py-20 md:py-28">
       <div className="mx-auto max-w-[1180px] px-6">
         <Reveal>
           <h2 className="font-display text-[clamp(28px,4.4vw,44px)] font-bold uppercase leading-none tracking-tight">
-            La vie du club
+            Les coulisses du BCV
           </h2>
         </Reveal>
-        <div className="mt-8 grid gap-6 md:grid-cols-[1.4fr_1fr]">
-          <Reveal>
-            <motion.a
-              href="#actus"
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.28, ease: EASE }}
-              className="group flex h-full flex-col overflow-hidden rounded-xl border border-bordure shadow-[0_8px_24px_rgba(22,22,22,0.06)]"
-            >
-              <div className="aspect-[16/10] overflow-hidden">
-                <img src={img("bcv-victoire-u13", 900, 560)} alt="Belle victoire des U13" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-              </div>
-              <div className="p-6">
-                <time className="text-[13px] text-neutral-500">20 juin 2026</time>
-                <h3 className="mt-1 font-display text-[22px] font-semibold uppercase leading-tight">
-                  Belle victoire des U13 en finale !
-                </h3>
-                <span className="mt-2 inline-flex items-center gap-1 font-display text-[14px] uppercase tracking-wide text-rouge">
-                  Lire l'article <IconArrowRight className="h-4 w-4" />
-                </span>
-              </div>
-            </motion.a>
-          </Reveal>
-          <div className="grid gap-6">
-            {[
-              { d: "14 juin 2026", t: "Tournoi de fin de saison", s: "tournoi" },
-              { d: "5 juin 2026", t: "Portrait : notre coach U15", s: "coach" },
-            ].map((a, i) => (
-              <Reveal key={a.t} delay={0.1 + i * 0.08}>
-                <motion.a
-                  href="#actus"
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.25, ease: EASE }}
-                  className="group grid grid-cols-[130px_1fr] overflow-hidden rounded-xl border border-bordure shadow-[0_8px_24px_rgba(22,22,22,0.06)]"
-                >
-                  <img src={img(`bcv-${a.s}`, 260, 260)} alt={a.t} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  <div className="p-5">
-                    <time className="text-[13px] text-neutral-500">{a.d}</time>
-                    <h3 className="mt-1 font-display text-[18px] font-semibold uppercase leading-tight">{a.t}</h3>
-                  </div>
-                </motion.a>
-              </Reveal>
-            ))}
-          </div>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {articles.map((a, i) => (
+            <Reveal key={a.t} delay={i * 0.08}>
+              <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-bordure shadow-[0_8px_24px_rgba(22,22,22,0.06)]">
+                {/* PHOTO — à remplacer */}
+                <div className="aspect-[16/10] bg-coquille" aria-hidden />
+                <div className="p-6">
+                  <time className="text-[13px] text-neutral-500">{a.d}</time>
+                  <h3 className="mt-1 font-display text-[20px] font-semibold uppercase leading-tight">{a.t}</h3>
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+        <div className="mt-10 text-center">
+          <Link to="/actus" className="inline-flex items-center gap-1 font-display text-[14px] uppercase tracking-wide text-rouge hover:underline">
+            Lire toutes nos actualités <IconArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>
@@ -431,10 +361,14 @@ function BandeauInscriptions() {
       <div className="mx-auto flex max-w-[1180px] flex-wrap items-center justify-between gap-8 px-6">
         <Reveal>
           <h2 className="font-display text-[clamp(28px,4.4vw,44px)] font-bold uppercase leading-none tracking-tight text-white">
-            Inscriptions ouvertes
+            Prêt à mouiller le maillot ?
           </h2>
-          <p className="mt-2 max-w-[50ch] text-[17px] text-[#eaffef]">
-            Permanences au gymnase les samedis de septembre, de 10h à 12h. Pass'Sport et coupons ANCV acceptés.
+          {/* TODO rentrée sept. 2026 : remplacer par :
+            "Rejoignez-nous pour la saison 2026/2027 — Pass'Sport et coupons ANCV acceptés."
+          */}
+          <p className="mt-2 max-w-[52ch] text-[17px] text-[#eaffef]">
+            Les entraînements reprennent prochainement, encore un peu de patience !
+            Retrouvez les horaires, les tarifs et toutes les modalités dans très peu de temps.
           </p>
         </Reveal>
         <Reveal delay={0.1}>
@@ -442,7 +376,7 @@ function BandeauInscriptions() {
             to="/inscriptions"
             className="inline-flex min-h-[56px] items-center rounded-lg bg-white px-9 font-display text-[18px] uppercase tracking-wide text-vert-fonce transition-all hover:-translate-y-0.5 hover:shadow-xl"
           >
-            S'inscrire
+            Je veux m'inscrire
           </Link>
         </Reveal>
       </div>
@@ -453,7 +387,8 @@ function BandeauInscriptions() {
 /* ---------- Partenaires (marquee) ---------- */
 function Partenaires() {
   const reduce = useReducedMotion();
-  const logos = ["Mairie de Verfeil", "Crédit Mutuel", "Intersport", "Garage Central", "Boulangerie Pace", "Décathlon"];
+  {/* TODO : remplacer par les vrais logos partenaires */}
+  const logos = ["Partenaire", "Partenaire", "Partenaire", "Partenaire", "Partenaire", "Partenaire"];
   // Un "bloc" assez large pour couvrir un écran ultra-large (34" ≈ 3440px), puis dupliqué pour la boucle -50%.
   const bloc = [...logos, ...logos, ...logos];
   const row = [...bloc, ...bloc];
@@ -475,7 +410,7 @@ function Partenaires() {
           {row.map((l, i) => (
             <div
               key={i}
-              className="flex h-24 w-52 shrink-0 items-center justify-center rounded-lg border border-bordure bg-coquille font-display text-[15px] uppercase tracking-wide text-neutral-400"
+              className="flex h-20 w-52 shrink-0 items-center justify-center rounded-lg border border-bordure bg-coquille font-display text-[15px] uppercase tracking-wide text-neutral-400"
             >
               {l}
             </div>
@@ -495,19 +430,27 @@ function Newsletter() {
           <div className="grid items-center gap-10 rounded-2xl border border-bordure bg-white p-8 shadow-[0_8px_24px_rgba(22,22,22,0.06)] md:grid-cols-2 md:p-12">
             <div>
               <h2 className="font-display text-[clamp(24px,3.6vw,36px)] font-bold uppercase leading-none tracking-tight">
-                Restez informés
+                Ne manquez aucune info !
               </h2>
-              <p className="mt-2 text-[16px] text-neutral-600">
-                Recevez les actus du club et les dates importantes par e-mail.
+              <p className="mt-2 max-w-[46ch] text-[16px] text-neutral-600">
+                Inscrivez-vous pour recevoir les derniers résultats, les événements du club
+                et les bonnes nouvelles du BCV directement dans votre boîte mail.
               </p>
             </div>
-            <form onSubmit={(e) => e.preventDefault()}>
+            {/* TODO Phase 4 : brancher Formspree */}
+            <form onSubmit={(e) => e.preventDefault()} className="relative">
+              {/* Honeypot anti-bot : invisible pour l'utilisateur, piège pour les robots. */}
+              <div className="absolute left-[-9999px]" aria-hidden>
+                <label htmlFor="site_internet">Ne pas remplir</label>
+                <input id="site_internet" name="site_internet" type="text" tabIndex={-1} autoComplete="off" />
+              </div>
               <label htmlFor="email" className="mb-2 block font-display font-semibold uppercase text-[14px] tracking-wide">
                 Votre adresse e-mail
               </label>
               <div className="flex flex-wrap gap-3">
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   required
                   placeholder="prenom@exemple.fr"
@@ -522,8 +465,10 @@ function Newsletter() {
               </div>
               <label className="mt-3 flex items-start gap-2 text-[14px] text-neutral-500">
                 <input type="checkbox" required className="mt-1" />
-                J'accepte de recevoir les e-mails du club et j'ai lu les{" "}
-                <a href="#" className="text-vert-fonce underline">mentions légales</a>.
+                <span>
+                  J'accepte de recevoir les e-mails du club et j'ai lu les{" "}
+                  <a href="#" className="text-vert-fonce underline">mentions légales</a>.
+                </span>
               </label>
             </form>
           </div>
