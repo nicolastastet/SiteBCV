@@ -163,7 +163,7 @@ function Stats() {
     <section className="border-b border-bordure" aria-label="Le club en chiffres">
       <div className="mx-auto flex max-w-[1180px] flex-wrap px-6">
         <Stat value={200} suffix="+" label="Licenciés" />
-        <Stat value={16} label="Équipes engagées" />
+        <Stat value={15} label="Équipes engagées" />
         <Stat value={103} label="Années d'histoire" />
         <Stat value={2} label="Gymnases pour s'entraîner" />
       </div>

@@ -24,7 +24,7 @@ const INSTITUTIONS = ["FFBB", "Ligue Occitanie", "Comité 31 Haute-Garonne"];
 const REPERES = [
   { chiffre: "1923", label: "Fondation du club" },
   { chiffre: "200+", label: "licenciés aujourd'hui" },
-  { chiffre: "16", label: "équipes" },
+  { chiffre: "15", label: "équipes" },
   { chiffre: "103 ans", label: "d'histoire" },
 ];
 
