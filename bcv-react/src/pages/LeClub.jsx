@@ -20,7 +20,11 @@ const BUREAU = [
   { role: "Trésorier(e)", prenom: "Prénom à venir", photo: "/images/club/bureau/tresorier.jpg" },
 ];
 
-const INSTITUTIONS = ["FFBB", "Ligue Occitanie", "Comité 31 Haute-Garonne"];
+const INSTITUTIONS = [
+  { nom: "FFBB", logo: "/images/affiliations/ffbb.svg" },
+  { nom: "Ligue Occitanie", logo: "/images/affiliations/ligue-occitanie.png" },
+  { nom: "Comité 31 Haute-Garonne", logo: "/images/affiliations/comite-31.png" },
+];
 
 const REPERES = [
   { chiffre: "1923", label: "Fondation du club" },
@@ -137,11 +141,14 @@ export default function LeClub() {
             </p>
           </Reveal>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {INSTITUTIONS.map((nom, i) => (
-              <Reveal key={nom} delay={i * 0.06}>
-                {/* LOGO — à remplacer par le logo officiel */}
-                <div className="flex h-24 items-center justify-center rounded-lg border border-bordure bg-coquille px-6 text-center font-display text-[15px] uppercase tracking-wide text-neutral-500">
-                  {nom}
+            {INSTITUTIONS.map((inst, i) => (
+              <Reveal key={inst.nom} delay={i * 0.06}>
+                <div className="flex h-24 items-center justify-center rounded-lg border border-bordure bg-coquille px-6">
+                  <img
+                    src={inst.logo}
+                    alt={inst.nom}
+                    className="max-h-14 w-auto max-w-[85%] object-contain"
+                  />
                 </div>
               </Reveal>
             ))}
