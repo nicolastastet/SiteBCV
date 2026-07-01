@@ -11,6 +11,7 @@ import {
   IconAlertTriangle,
 } from "@tabler/icons-react";
 import Reveal from "../components/Reveal.jsx";
+import Seo from "../components/Seo.jsx";
 
 const CATEGORIES = ["U7", "U9", "U11", "U13", "U15", "U18", "Seniors", "Loisir", "Je ne sais pas — laissez le club déterminer"];
 
@@ -85,6 +86,11 @@ export default function Inscriptions() {
 
   return (
     <>
+      <Seo
+        titre="Inscriptions & Licence"
+        description="Rejoignez le BCV : tarifs, démarches et permanences d'inscription pour la saison 2026-2027."
+        chemin="/inscriptions"
+      />
       {/* En-tête + bifurcation */}
       <section className="relative overflow-hidden bg-rouge">
         <div className="relative z-10 mx-auto max-w-[1180px] px-6 pb-20 pt-12 md:pt-16">

@@ -6,6 +6,7 @@ import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
 import PhotoAvecFallback from "../components/PhotoAvecFallback.jsx";
 import BlocNewsletter from "../components/BlocNewsletter.jsx";
+import Seo, { SITE_URL } from "../components/Seo.jsx";
 import { getArticle } from "../data/articles.js";
 import { CATEGORIES, formatDateFr } from "../lib.js";
 
@@ -50,8 +51,26 @@ export default function ArticlePage() {
   const cat = CATEGORIES[article.categorie];
   const url = encodeURIComponent(window.location.href);
 
+  const jsonLdArticle = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.titre,
+    datePublished: article.date,
+    image: `${SITE_URL}${article.image}`,
+    author: { "@type": "Organization", name: "Basket Club Verfeillois" },
+    publisher: { "@type": "Organization", name: "Basket Club Verfeillois" },
+  };
+
   return (
     <>
+      <Seo
+        titre={article.titre}
+        description={(article.extrait || "").slice(0, 160)}
+        chemin={`/actus/${article.slug}`}
+        image={article.image}
+        type="article"
+        jsonLd={jsonLdArticle}
+      />
       <SectionHero
         titre={article.titre}
         breadcrumb={[{ label: "Actualités", to: "/actus" }, { label: article.titre }]}

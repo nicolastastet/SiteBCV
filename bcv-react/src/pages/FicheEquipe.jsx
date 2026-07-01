@@ -3,6 +3,7 @@ import { IconCalendarEvent, IconMapPin, IconUsers, IconArrowRight } from "@table
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
 import PhotoAvecFallback from "../components/PhotoAvecFallback.jsx";
+import Seo from "../components/Seo.jsx";
 import NotFound from "./NotFound.jsx";
 import { getEquipe, FAMILLES } from "../data/equipes.js";
 
@@ -30,6 +31,11 @@ export default function FicheEquipe() {
 
   return (
     <>
+      <Seo
+        titre={equipe.nom}
+        description={`L'équipe ${equipe.nom} du Basket Club Verfeillois : encadrement, entraînements et inscriptions. Rejoignez le club à Verfeil.`}
+        chemin={`/equipes/${equipe.slug}`}
+      />
       <SectionHero
         titre={equipe.nom}
         accroche={equipe.age || undefined}

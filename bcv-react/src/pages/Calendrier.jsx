@@ -1,6 +1,7 @@
 import { IconHome, IconBus, IconTrophy, IconMapPin, IconArrowNarrowRight } from "@tabler/icons-react";
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
+import Seo from "../components/Seo.jsx";
 import calendrier from "../data/calendrier.json";
 
 // Données éditables par le bénévole via Decap CMS (/admin) → src/data/calendrier.json.
@@ -34,6 +35,11 @@ function LigneMatch({ m, exterieur = false }) {
 export default function Calendrier() {
   return (
     <>
+      <Seo
+        titre="Calendrier & Résultats"
+        description="Le programme du week-end (matchs à domicile et à l'extérieur) et les derniers résultats des équipes du BCV."
+        chemin="/calendrier"
+      />
       <SectionHero
         titre="Calendrier & Résultats"
         accroche="Retrouvez le programme du week-end et les derniers résultats de nos équipes."

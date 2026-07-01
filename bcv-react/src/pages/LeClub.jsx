@@ -3,6 +3,7 @@ import { IconMapPin, IconArrowRight } from "@tabler/icons-react";
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
 import PhotoAvecFallback from "../components/PhotoAvecFallback.jsx";
+import Seo from "../components/Seo.jsx";
 
 // Données placeholder — à remplacer par les vraies infos du club.
 // `photo` : chemin attendu dans public/images/ (placeholder tant que le fichier n'existe pas).
@@ -57,6 +58,11 @@ function CartePersonne({ prenom, dessous, badge, photo }) {
 export default function LeClub() {
   return (
     <>
+      <Seo
+        titre="Le Club"
+        description="Fondé sur le respect, la solidarité et le partage, le Basket Club Verfeillois forme des joueurs épanouis dans un cadre familial depuis 1923."
+        chemin="/le-club"
+      />
       <SectionHero
         titre="Le Basket Club Verfeillois"
         accroche="Un projet sportif et éducatif : faire grandir les jeunes de Verfeil, sur le terrain comme en dehors, dans le respect et le plaisir du jeu."

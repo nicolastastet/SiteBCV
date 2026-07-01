@@ -3,7 +3,14 @@ import { IconArrowRight } from "@tabler/icons-react";
 import SectionHero from "./SectionHero.jsx";
 import Reveal from "./Reveal.jsx";
 import PhotoAvecFallback from "./PhotoAvecFallback.jsx";
+import Seo from "./Seo.jsx";
 import { FAMILLES, getEquipesParFamille } from "../data/equipes.js";
+
+const DESCRIPTIONS = {
+  "mini-basket": "L'école de basket du BCV pour les 5 à 10 ans : U7-U9, U11 Mixte, U11 Filles et U11 Garçons. Découvrez le jeu en s'amusant.",
+  jeunes: "Les équipes jeunes du Basket Club Verfeillois, des U13 aux U18, filles et garçons. Progression, compétition et esprit d'équipe.",
+  seniors: "Les équipes seniors du Basket Club Verfeillois : Femmes et Garçons. Le basket compétition dans une ambiance conviviale.",
+};
 
 // Page catégorie (niveau 2) : liste des équipes d'une famille, avec fil d'Ariane.
 export default function PageCategorie({ famille }) {
@@ -11,6 +18,7 @@ export default function PageCategorie({ famille }) {
   const equipes = getEquipesParFamille(famille);
   return (
     <>
+      <Seo titre={f.nom} description={DESCRIPTIONS[famille]} chemin={`/equipes/${famille}`} />
       <SectionHero
         titre={f.nom}
         accroche={f.tranche}

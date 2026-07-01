@@ -11,6 +11,7 @@ import {
 } from "@tabler/icons-react";
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
+import Seo from "../components/Seo.jsx";
 
 const MOTIFS = [
   "Question générale",
@@ -34,6 +35,11 @@ export default function Contact() {
 
   return (
     <>
+      <Seo
+        titre="Contact"
+        description="Contactez le Basket Club Verfeillois : email, réseaux sociaux, adresse du gymnase et horaires de permanence."
+        chemin="/contact"
+      />
       <SectionHero titre="Contact" accroche="Une question ? Écrivez-nous, on vous répond vite." />
 
       <section className="py-16 md:py-24">

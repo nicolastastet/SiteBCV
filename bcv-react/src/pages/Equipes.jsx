@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { IconBallBasketball, IconRun, IconTrophy, IconArrowRight } from "@tabler/icons-react";
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
+import Seo from "../components/Seo.jsx";
 import { FAMILLES } from "../data/equipes.js";
 
 const ICONES = {
@@ -14,6 +15,11 @@ export default function Equipes() {
   const familles = Object.values(FAMILLES);
   return (
     <>
+      <Seo
+        titre="Équipes & Catégories"
+        description="Toutes les équipes du BCV, du mini-basket aux seniors, filles et garçons. Trouvez la catégorie qui vous correspond et rejoignez le club."
+        chemin="/equipes"
+      />
       <SectionHero
         titre="Équipes & Catégories"
         accroche="De l'école de basket aux seniors, trouvez l'équipe qui vous correspond."

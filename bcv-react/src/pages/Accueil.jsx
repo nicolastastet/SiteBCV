@@ -19,7 +19,22 @@ import {
 } from "@tabler/icons-react";
 import Reveal from "../components/Reveal.jsx";
 import Stat from "../components/Stat.jsx";
+import Seo from "../components/Seo.jsx";
 import { EASE, LOGO_BLANC, img } from "../lib.js";
+
+const JSONLD_CLUB = {
+  "@context": "https://schema.org",
+  "@type": "SportsClub",
+  name: "Basket Club Verfeillois",
+  url: "https://basketclubverfeillois.fr",
+  sport: "Basketball",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Verfeil",
+    postalCode: "31590",
+    addressCountry: "FR",
+  },
+};
 
 /* ---------- Hero ---------- */
 function Hero() {
@@ -481,6 +496,12 @@ function Newsletter() {
 export default function Accueil() {
   return (
     <>
+      <Seo
+        titre="Accueil"
+        description="Club de basket à Verfeil (31). Du mini-basket aux seniors, rejoignez une famille de plus de 200 licenciés."
+        chemin="/"
+        jsonLd={JSONLD_CLUB}
+      />
       <Hero />
       <Stats />
       <Bento />

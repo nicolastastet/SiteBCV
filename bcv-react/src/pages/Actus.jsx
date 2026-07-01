@@ -3,6 +3,7 @@ import { IconArrowRight } from "@tabler/icons-react";
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
 import PhotoAvecFallback from "../components/PhotoAvecFallback.jsx";
+import Seo from "../components/Seo.jsx";
 import { articles } from "../data/articles.js";
 import { CATEGORIES, formatDateFr } from "../lib.js";
 
@@ -24,6 +25,11 @@ const VISIBILITE = {
 export default function Actus() {
   return (
     <>
+      <Seo
+        titre="Actualités"
+        description="Toute l'actualité du Basket Club Verfeillois : récits de matchs, vie du club et coulisses, semaine après semaine."
+        chemin="/actus"
+      />
       <SectionHero titre="Actualités" accroche="La vie du club, semaine après semaine." />
 
       {/* La section est le "group" : les radios cochés pilotent l'affichage via CSS (aucun JS). */}

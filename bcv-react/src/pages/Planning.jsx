@@ -1,6 +1,7 @@
 import { IconCalendarEvent, IconDownload, IconBell, IconBeach } from "@tabler/icons-react";
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
+import Seo from "../components/Seo.jsx";
 
 // Code couleur fonctionnel par gymnase (demandé dans la spec) — tons pâles
 // discrets, en complément de la charte rouge/vert/blanc.
@@ -29,6 +30,11 @@ const CRENEAUX = [
 export default function Planning() {
   return (
     <>
+      <Seo
+        titre="Planning d'entraînement"
+        description="Jours, horaires et gymnases des entraînements de toutes les équipes du Basket Club Verfeillois à Verfeil."
+        chemin="/planning"
+      />
       <SectionHero
         titre="Planning d'entraînement"
         accroche="Retrouvez les jours, horaires et lieux d'entraînement de chaque équipe."
