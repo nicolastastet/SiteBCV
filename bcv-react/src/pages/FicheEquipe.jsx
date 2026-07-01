@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { IconCalendarEvent, IconMapPin, IconUsers, IconArrowRight } from "@tabler/icons-react";
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
+import PhotoAvecFallback from "../components/PhotoAvecFallback.jsx";
 import NotFound from "./NotFound.jsx";
 import { getEquipe, FAMILLES } from "../data/equipes.js";
 
@@ -41,9 +42,13 @@ export default function FicheEquipe() {
 
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-[1180px] px-6">
-          {/* PHOTO — à remplacer (photo d'équipe) */}
+          {/* Photo d'équipe : /images/equipes/[slug].jpg — placeholder tant que le fichier n'existe pas */}
           <Reveal>
-            <div className="aspect-[16/7] w-full rounded-xl bg-coquille shadow-[0_14px_40px_rgba(22,22,22,0.10)]" aria-hidden />
+            <PhotoAvecFallback
+              src={`/images/equipes/${equipe.slug}.jpg`}
+              alt={`Équipe ${equipe.nom}`}
+              className="aspect-[16/7] w-full rounded-xl object-cover shadow-[0_14px_40px_rgba(22,22,22,0.10)]"
+            />
           </Reveal>
 
           <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">

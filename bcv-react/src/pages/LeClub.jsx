@@ -2,19 +2,21 @@ import { Link } from "react-router-dom";
 import { IconMapPin, IconArrowRight } from "@tabler/icons-react";
 import SectionHero from "../components/SectionHero.jsx";
 import Reveal from "../components/Reveal.jsx";
+import PhotoAvecFallback from "../components/PhotoAvecFallback.jsx";
 
 // Données placeholder — à remplacer par les vraies infos du club.
+// `photo` : chemin attendu dans public/images/ (placeholder tant que le fichier n'existe pas).
 const COACHS = [
-  { prenom: "Coach 1", equipes: "U13 Garçons", diplome: "Brevet Fédéral 1" },
-  { prenom: "Coach 2", equipes: "U15 Garçons / U18 Garçons", diplome: "Brevet Fédéral 2" },
-  { prenom: "Coach 3", equipes: "Seniors", diplome: "Brevet Fédéral 1" },
-  { prenom: "Coach 4", equipes: "Mini Basket", diplome: "Initiateur" },
+  { prenom: "Coach 1", equipes: "U13 Garçons", diplome: "Brevet Fédéral 1", photo: "/images/club/coachs/coach-1.jpg" },
+  { prenom: "Coach 2", equipes: "U15 Garçons / U18 Garçons", diplome: "Brevet Fédéral 2", photo: "/images/club/coachs/coach-2.jpg" },
+  { prenom: "Coach 3", equipes: "Seniors", diplome: "Brevet Fédéral 1", photo: "/images/club/coachs/coach-3.jpg" },
+  { prenom: "Coach 4", equipes: "Mini Basket", diplome: "Initiateur", photo: "/images/club/coachs/coach-4.jpg" },
 ];
 
 const BUREAU = [
-  { role: "Président(e)", prenom: "Prénom à venir" },
-  { role: "Secrétaire", prenom: "Prénom à venir" },
-  { role: "Trésorier(e)", prenom: "Prénom à venir" },
+  { role: "Président(e)", prenom: "Prénom à venir", photo: "/images/club/bureau/president.jpg" },
+  { role: "Secrétaire", prenom: "Prénom à venir", photo: "/images/club/bureau/secretaire.jpg" },
+  { role: "Trésorier(e)", prenom: "Prénom à venir", photo: "/images/club/bureau/tresorier.jpg" },
 ];
 
 const INSTITUTIONS = ["FFBB", "Ligue Occitanie", "Comité 31 Haute-Garonne"];
@@ -32,12 +34,15 @@ const GYMNASES = [
   { nom: "Gymnase de Gragnague", adresse: "Gragnague (31380)" },
 ];
 
-/* Carte coach / bureau : photo ronde placeholder + identité. */
-function CartePersonne({ prenom, dessous, badge }) {
+/* Carte coach / bureau : photo ronde (avec fallback) + identité. */
+function CartePersonne({ prenom, dessous, badge, photo }) {
   return (
     <div className="flex flex-col items-center rounded-xl border border-bordure bg-white p-6 text-center shadow-[0_8px_24px_rgba(22,22,22,0.06)]">
-      {/* PHOTO — à remplacer */}
-      <div className="mb-4 h-24 w-24 rounded-full bg-coquille" aria-hidden />
+      <PhotoAvecFallback
+        src={photo}
+        alt={prenom}
+        className="mb-4 h-24 w-24 rounded-full object-cover"
+      />
       <span className="font-display text-[18px] font-semibold uppercase leading-tight">{prenom}</span>
       {dessous && <p className="mt-1 text-[14px] text-neutral-600">{dessous}</p>}
       {badge && (
@@ -90,7 +95,7 @@ export default function LeClub() {
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {COACHS.map((c, i) => (
               <Reveal key={c.prenom} delay={i * 0.06}>
-                <CartePersonne prenom={c.prenom} dessous={c.equipes} badge={c.diplome} />
+                <CartePersonne prenom={c.prenom} dessous={c.equipes} badge={c.diplome} photo={c.photo} />
               </Reveal>
             ))}
             {/* Carte vide pour un futur coach */}
@@ -115,7 +120,7 @@ export default function LeClub() {
           <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
             {BUREAU.map((m, i) => (
               <Reveal key={m.role} delay={i * 0.06}>
-                <CartePersonne prenom={m.prenom} dessous={m.role} />
+                <CartePersonne prenom={m.prenom} dessous={m.role} photo={m.photo} />
               </Reveal>
             ))}
           </div>
