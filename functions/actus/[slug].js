@@ -26,6 +26,11 @@ export async function onRequest({ request, params, next }) {
   if (!estUnRobot) return next();
 
   const slug = params.slug;
+
+  // Validation d'entrée : le slug ne doit contenir que minuscules, chiffres et tirets
+  // (mêmes slugs que les fichiers .md). Bloque toute injection dans l'URL fetch ci-dessous.
+  if (!/^[a-z0-9-]+$/.test(slug || "")) return next();
+
   const url = new URL(request.url);
 
   try {
