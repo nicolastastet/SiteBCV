@@ -110,7 +110,7 @@ export default function Contact() {
                 <ul className="grid gap-3 text-[15px]">
                   <li className="flex items-center gap-3">
                     <IconMail className="h-5 w-5 shrink-0 text-rouge" stroke={1.7} />
-                    <a href="mailto:contact@bcv-verfeil.fr" className="text-neutral-700 hover:text-encre hover:underline">contact@bcv-verfeil.fr</a>
+                    <a href="mailto:correspondantebcv@gmail.com" className="text-neutral-700 hover:text-encre hover:underline">correspondantebcv@gmail.com</a>
                   </li>
                   <li className="flex items-center gap-3">
                     <IconPhone className="h-5 w-5 shrink-0 text-rouge" stroke={1.7} />
@@ -152,12 +152,10 @@ export default function Contact() {
               <div className="rounded-xl border border-bordure bg-white p-6 shadow-[0_8px_24px_rgba(22,22,22,0.06)]">
                 <p className="mb-4 font-display text-[14px] font-semibold uppercase tracking-wide text-rouge">Suivez-nous</p>
                 <div className="flex gap-3">
-                  {/* TODO : URL Facebook BCV */}
-                  <a href="#" rel="noopener noreferrer" aria-label="Facebook BCV" className="flex h-11 w-11 items-center justify-center rounded-lg border border-bordure text-encre transition-colors hover:border-rouge hover:text-rouge">
+                  <a href="https://www.facebook.com/BasketClubVerfeil" target="_blank" rel="noopener noreferrer" aria-label="Facebook BCV" className="flex h-11 w-11 items-center justify-center rounded-lg border border-bordure text-encre transition-colors hover:border-rouge hover:text-rouge">
                     <IconBrandFacebook className="h-5 w-5" />
                   </a>
-                  {/* TODO : URL Instagram BCV */}
-                  <a href="#" rel="noopener noreferrer" aria-label="Instagram BCV" className="flex h-11 w-11 items-center justify-center rounded-lg border border-bordure text-encre transition-colors hover:border-rouge hover:text-rouge">
+                  <a href="https://www.instagram.com/basket_club_verfeillois" target="_blank" rel="noopener noreferrer" aria-label="Instagram BCV" className="flex h-11 w-11 items-center justify-center rounded-lg border border-bordure text-encre transition-colors hover:border-rouge hover:text-rouge">
                     <IconBrandInstagram className="h-5 w-5" />
                   </a>
                 </div>

@@ -21,8 +21,8 @@ export default function Footer() {
             Basket Club Verfeillois – La passion, le jeu, la famille.
           </p>
           <p className="mt-4 text-[14px] text-neutral-600">3 rue Vauraise, 31590 Verfeil</p>
-          <a href="mailto:contact@bcv-verfeil.fr" className="mt-2 inline-block text-[14px] text-neutral-600 hover:text-encre">
-            contact@bcv-verfeil.fr
+          <a href="mailto:correspondantebcv@gmail.com" className="mt-2 inline-block text-[14px] text-neutral-600 hover:text-encre">
+            correspondantebcv@gmail.com
           </a>
           {/* TODO : remplacer par le vrai numéro */}
           <p className="mt-1 text-[14px] text-neutral-600">06 XX XX XX XX</p>
@@ -49,14 +49,12 @@ export default function Footer() {
           <p className="mb-3 font-display text-[14px] font-semibold uppercase text-encre">Suivez-nous</p>
           <ul className="flex flex-col gap-1.5">
             <li>
-              {/* TODO : URL Instagram BCV */}
-              <a href="#" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[14px] text-neutral-600 hover:text-encre hover:underline">
+              <a href="https://www.instagram.com/basket_club_verfeillois" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[14px] text-neutral-600 hover:text-encre hover:underline">
                 <IconBrandInstagram className="h-4 w-4" /> Instagram
               </a>
             </li>
             <li>
-              {/* TODO : URL Facebook BCV */}
-              <a href="#" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[14px] text-neutral-600 hover:text-encre hover:underline">
+              <a href="https://www.facebook.com/BasketClubVerfeil" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[14px] text-neutral-600 hover:text-encre hover:underline">
                 <IconBrandFacebook className="h-4 w-4" /> Facebook
               </a>
             </li>
