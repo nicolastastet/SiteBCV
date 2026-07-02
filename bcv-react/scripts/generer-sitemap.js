@@ -16,6 +16,7 @@ const aujourdhui = new Date().toISOString().slice(0, 10);
 const routesStatiques = [
   "/", "/le-club", "/equipes", "/equipes/mini-basket", "/equipes/jeunes",
   "/equipes/seniors", "/planning", "/calendrier", "/actus", "/inscriptions", "/contact",
+  "/mentions-legales",
 ];
 
 // 2. Une entrée par fiche équipe présente dans les données

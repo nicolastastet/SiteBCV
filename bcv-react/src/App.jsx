@@ -13,6 +13,7 @@ import Actus from "./pages/Actus.jsx";
 import ArticlePage from "./pages/ArticlePage.jsx";
 import Inscriptions from "./pages/Inscriptions.jsx";
 import Contact from "./pages/Contact.jsx";
+import MentionsLegales from "./pages/MentionsLegales.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/actus/:slug" element={<ArticlePage />} />
         <Route path="/inscriptions" element={<Inscriptions />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

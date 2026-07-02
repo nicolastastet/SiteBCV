@@ -482,7 +482,7 @@ function Newsletter() {
                 <input type="checkbox" required className="mt-1" />
                 <span>
                   J'accepte de recevoir les e-mails du club et j'ai lu les{" "}
-                  <a href="#" className="text-vert-fonce underline">mentions légales</a>.
+                  <a href="/mentions-legales" target="_blank" rel="noopener noreferrer" className="text-vert-fonce underline">mentions légales</a>.
                 </span>
               </label>
             </form>

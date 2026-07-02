@@ -39,8 +39,7 @@ export default function Footer() {
               </li>
             ))}
             <li>
-              {/* TODO Phase 4 : page Mentions légales */}
-              <a href="#" className="text-[14px] text-neutral-600 hover:text-encre hover:underline">Mentions légales</a>
+              <Link to="/mentions-legales" className="text-[14px] text-neutral-600 hover:text-encre hover:underline">Mentions légales</Link>
             </li>
           </ul>
         </div>
@@ -65,12 +64,10 @@ export default function Footer() {
           <p className="mb-3 font-display text-[14px] font-semibold uppercase text-encre">Informations</p>
           <ul className="flex flex-col gap-1.5">
             <li>
-              {/* TODO Phase 4 : page Mentions légales */}
-              <a href="#" className="text-[14px] text-neutral-600 hover:text-encre hover:underline">Mentions légales</a>
+              <Link to="/mentions-legales" className="text-[14px] text-neutral-600 hover:text-encre hover:underline">Mentions légales</Link>
             </li>
             <li>
-              {/* TODO Phase 4 : page Confidentialité (RGPD) */}
-              <a href="#" className="text-[14px] text-neutral-600 hover:text-encre hover:underline">Confidentialité (RGPD)</a>
+              <Link to="/mentions-legales" className="text-[14px] text-neutral-600 hover:text-encre hover:underline">Confidentialité (RGPD)</Link>
             </li>
           </ul>
         </div>
