@@ -15,7 +15,8 @@ const COACHS = [
 ];
 
 const BUREAU = [
-  { role: "Président(e)", prenom: "Prénom à venir", photo: "/images/club/bureau/president.jpg" },
+  { role: "Co-Président", prenom: "Pierre-Emmanuel Angot", photo: "/images/club/bureau/pierre-emmanuel-angot.jpg" },
+  { role: "Co-Présidente", prenom: "Stéphanie Altinier", photo: "/images/club/bureau/stephanie-altinier.jpg" },
   { role: "Secrétaire", prenom: "Prénom à venir", photo: "/images/club/bureau/secretaire.jpg" },
   { role: "Trésorier(e)", prenom: "Prénom à venir", photo: "/images/club/bureau/tresorier.jpg" },
 ];
@@ -72,7 +73,7 @@ export default function LeClub() {
         accroche="Un projet sportif et éducatif : faire grandir les jeunes de Verfeil, sur le terrain comme en dehors, dans le respect et le plaisir du jeu."
       />
 
-      {/* Section 1 — Mot du Président */}
+      {/* Section 1 — Mot des Co-Présidents */}
       <section className="py-16 md:py-24">
         <div className="mx-auto grid max-w-[1180px] items-center gap-12 px-6 md:grid-cols-[1.05fr_0.95fr]">
           <Reveal>
@@ -80,13 +81,16 @@ export default function LeClub() {
             <div className="aspect-[4/3] w-full rounded-xl bg-coquille shadow-[0_14px_40px_rgba(22,22,22,0.10)]" aria-hidden />
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mb-3 font-display text-[13px] uppercase tracking-[0.2em] text-rouge">Mot du Président</p>
+            <p className="mb-3 font-display text-[13px] uppercase tracking-[0.2em] text-rouge">Mot des Co-Présidents</p>
             <blockquote className="border-l-4 border-vert pl-5 text-[clamp(17px,2.4vw,20px)] italic leading-relaxed text-neutral-700">
               « Bienvenue au Basket Club Verfeillois. Depuis plus de 100 ans, notre club accueille
               les jeunes de Verfeil dans un esprit de respect, de progression et de plaisir du
               jeu. Notre priorité : un encadrement diplômé et bienveillant, pour que votre enfant
               s'épanouisse autant sur le terrain qu'en dehors. »
             </blockquote>
+            <p className="mt-4 pl-5 font-display text-[14px] uppercase tracking-wide text-neutral-500">
+              — Pierre-Emmanuel Angot et Stéphanie Altinier, Co-Présidents du BCV
+            </p>
           </Reveal>
         </div>
       </section>
