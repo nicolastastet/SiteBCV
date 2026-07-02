@@ -53,7 +53,7 @@ export default function FicheEquipe() {
             <PhotoAvecFallback
               src={`/images/equipes/${equipe.slug}.jpg`}
               alt={`Équipe ${equipe.nom}`}
-              className="aspect-[16/7] w-full rounded-xl object-cover shadow-[0_14px_40px_rgba(22,22,22,0.10)]"
+              className="aspect-[3/2] w-full rounded-xl object-cover shadow-[0_14px_40px_rgba(22,22,22,0.10)]"
             />
           </Reveal>
 
